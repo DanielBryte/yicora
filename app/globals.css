@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #F7F6F4;
+    --foreground: #171717;
+    
+    --burgundy: #2E0219;
+    --burgundy-deep: #1A000E;
+    --burgundy-light: #4A052A;
+
+    --berry: #B72E63;
+    --berry-hover: #9E2452;
+
+    --card: #FFFFFF;
+    --card-foreground: #171717;
+
+    --muted: #737373;
+    --muted-bg: #F0EEEA;
+
+    --border: #E5E2DC;
+
+    --radius-xl: 1.5rem;
+    --radius-2xl: 2rem;
   }
 }
 
+@theme {
+  --color-burgundy: #2E0219;
+  --color-burgundy-deep: #1A000E;
+  --color-burgundy-light: #4A052A;
+  --color-berry: #B72E63;
+  --color-berry-hover: #9E2452;
+  --color-offwhite: #F7F6F4;
+  --color-darktext: #171717;
+  --color-mutedtext: #737373;
+
+  --font-heading: var(--font-ubuntu), sans-serif;
+  --font-sans: var(--font-ubuntu-sans), sans-serif;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ubuntu-sans), system-ui, -apple-system, sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ubuntu), sans-serif;
+}
+
+/* Glassmorphism helpers */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(229, 226, 220, 0.8);
+}
+
+.glass-card-dark {
+  background: rgba(46, 2, 25, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bg-burgundy-gradient {
+  background: linear-gradient(180deg, #2E0219 0%, #1A000E 100%);
+}
+
+.bg-burgundy-radial {
+  background: radial-gradient(circle at top center, #4A052A 0%, #2E0219 60%, #1A000E 100%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(183, 46, 99, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(183, 46, 99, 0.6);
 }
