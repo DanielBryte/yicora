@@ -6,47 +6,47 @@ import { Upload, Play, Sparkles, Mic, Music, Video, ArrowRight } from "lucide-re
 import Link from "next/link";
 
 const TABS = [
-  { id: "video-dubbing", label: "AI video dubbing", icon: Video },
-  { id: "text-to-speech", label: "AI text-to-speech", icon: Mic },
-  { id: "music-box", label: "AI music box", icon: Music },
-  { id: "voice-over", label: "AI voice over", icon: Sparkles },
+  { id: "video-dubbing", label: "AI video dubbing" },
+  { id: "text-to-speech", label: "AI text-to-speech" },
+  { id: "music-box", label: "AI music box" },
+  { id: "voice-over", label: "AI voice over" },
 ];
 
 const LANGUAGES = [
-  { code: "yo", name: "Yoruba", flag: "🇳🇬" },
-  { code: "ig", name: "Igbo", flag: "🇳🇬" },
-  { code: "ha", name: "Hausa", flag: "🇳🇬" },
-  { code: "sw", name: "Swahili", flag: "🇰🇪" },
-  { code: "pd", name: "Pidgin English", flag: "🇳🇬" },
-  { code: "en", name: "English", flag: "🇬🇧" },
-  { code: "fr", name: "French", flag: "🇫🇷" },
+  { code: "yo", name: "Yoruba", flagUrl: "https://flagcdn.com/w40/ng.png" },
+  { code: "ig", name: "Igbo", flagUrl: "https://flagcdn.com/w40/ng.png" },
+  { code: "ha", name: "Hausa", flagUrl: "https://flagcdn.com/w40/ng.png" },
+  { code: "sw", name: "Swahili", flagUrl: "https://flagcdn.com/w40/ke.png" },
+  { code: "pd", name: "Pidgin English", flagUrl: "https://flagcdn.com/w40/ng.png" },
+  { code: "en", name: "English", flagUrl: "https://flagcdn.com/w40/gb.png" },
+  { code: "fr", name: "French", flagUrl: "https://flagcdn.com/w40/fr.png" },
 ];
 
 export function InteractivePreview() {
   const [activeTab, setActiveTab] = useState("video-dubbing");
   const [selectedLang, setSelectedLang] = useState("yo");
-  const [videoUrl, setVideoUrl] = useState("https://youtube.com/watch?v=sample123");
+  const [videoUrl, setVideoUrl] = useState("https://www.youtube.com/watch?v=...");
   const [ttsText, setTtsText] = useState("Ekabo si YiCORA! System a ma sọ ede rẹ ni kiakia.");
   const [musicPrompt, setMusicPrompt] = useState("Energetic Afrobeats with warm guitar, brass, and catchy African percussion.");
 
+  const activeLangObj = LANGUAGES.find((l) => l.code === selectedLang) || LANGUAGES[0];
+
   return (
-    <div id="preview" className="w-full max-w-4xl mx-auto mt-12 bg-white rounded-3xl p-4 sm:p-6 shadow-2xl border border-neutral-200/80 text-darktext transition-all">
+    <div id="preview" className="w-full max-w-4xl mx-auto mt-12 bg-[#ECEAE5] rounded-[2.5rem] p-5 sm:p-7 shadow-2xl border border-white/60 text-darktext transition-all">
       {/* Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-neutral-100 rounded-2xl mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 p-1.5 bg-[#DBD8D2] rounded-2xl mb-6">
         {TABS.map((tab) => {
-          const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-medium text-xs sm:text-sm transition-all ${
+              className={`py-3 px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-center ${
                 isActive
-                  ? "bg-white text-darktext shadow-md font-semibold"
-                  : "text-neutral-600 hover:text-darktext hover:bg-neutral-200/60"
+                  ? "bg-white text-darktext shadow-sm"
+                  : "text-neutral-700 hover:text-darktext hover:bg-white/40"
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? "text-berry" : "text-neutral-500"}`} />
               <span>{tab.label}</span>
             </button>
           );
@@ -56,54 +56,68 @@ export function InteractivePreview() {
       {/* Tab 1: Video Dubbing */}
       {activeTab === "video-dubbing" && (
         <div className="space-y-5 animate-in fade-in duration-300">
-          <div className="border-2 border-dashed border-neutral-200 rounded-2xl p-8 bg-neutral-50/80 text-center hover:border-berry/50 transition-colors cursor-pointer group">
-            <div className="w-12 h-12 rounded-xl bg-neutral-200/80 text-neutral-600 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-              <Upload className="w-6 h-6 text-berry" />
+          <div className="border border-neutral-300/60 rounded-2xl p-12 bg-[#E2DFD9] text-center hover:border-berry/40 transition-colors cursor-pointer group">
+            <div className="w-10 h-10 rounded-lg text-neutral-800 flex items-center justify-center mx-auto mb-2 group-hover:scale-105 transition-transform">
+              <svg className="w-8 h-8 text-neutral-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" />
+              </svg>
             </div>
-            <h4 className="font-semibold text-darktext text-base">Upload a video!</h4>
-            <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-              Tap to choose a video file or drag & drop it here
+            <h4 className="font-bold text-darktext text-base sm:text-lg">Upload a video!</h4>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-1 font-normal">
+              See it in another language in just minutes.
             </p>
           </div>
 
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">
-              Or paste YouTube video link
+          <div className="space-y-1.5 text-left">
+            <label className="text-xs sm:text-sm font-normal text-neutral-700">
+              Or paste a YouTube link:
             </label>
             <div className="relative">
-              <Video className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-berry" />
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-6 h-4 bg-red-600 rounded flex items-center justify-center text-white text-[8px] font-bold">
+                ▶
+              </div>
               <input
                 type="text"
                 value={videoUrl}
                 onChange={(e) => setVideoUrl(e.target.value)}
-                placeholder="https://youtube.com/watch?v=..."
-                className="w-full pl-11 pr-4 py-3 bg-neutral-100 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berry/30 focus:border-berry text-darktext"
+                placeholder="https://www.youtube.com/watch?v=..."
+                className="w-full pl-12 pr-4 py-3 bg-[#E2DFD9] border border-neutral-300/60 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-berry/30 text-darktext font-mono"
               />
             </div>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-neutral-600">Translate to:</span>
-              <select
-                value={selectedLang}
-                onChange={(e) => setSelectedLang(e.target.value)}
-                className="bg-neutral-100 border border-neutral-200 rounded-xl px-4 py-2.5 text-sm font-medium text-darktext focus:outline-none focus:ring-2 focus:ring-berry/30"
-              >
-                {LANGUAGES.map((lang) => (
-                  <option key={lang.code} value={lang.code}>
-                    {lang.flag} {lang.name}
-                  </option>
-                ))}
-              </select>
+          <div className="pt-2 flex flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs sm:text-sm font-normal text-neutral-700">Translate to:</span>
+              <div className="relative inline-flex items-center">
+                <div className="bg-white border border-neutral-300/80 rounded-xl px-3.5 py-2.5 flex items-center gap-2.5 text-xs sm:text-sm font-medium text-darktext shadow-sm transition-all hover:bg-neutral-50">
+                  <img
+                    src={activeLangObj.flagUrl}
+                    alt={activeLangObj.name}
+                    className="w-5 h-3.5 object-cover rounded-xs border border-neutral-200 shrink-0"
+                  />
+                  <span>{activeLangObj.name}</span>
+                  <span className="text-neutral-500 text-xs ml-0.5">▾</span>
+                </div>
+                <select
+                  value={selectedLang}
+                  onChange={(e) => setSelectedLang(e.target.value)}
+                  className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+                >
+                  {LANGUAGES.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <Link
               href="/video"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg active:scale-95"
+              className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-berry hover:bg-berry-hover text-white font-medium text-xs sm:text-sm transition-all shadow-md active:scale-95"
             >
-              <span>Translate & Dub</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Translate video</span>
             </Link>
           </div>
         </div>
@@ -141,7 +155,7 @@ export function InteractivePreview() {
 
             <Link
               href="/voice"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
             >
               <Play className="w-4 h-4 fill-current" />
               <span>Generate Voice</span>
@@ -187,7 +201,7 @@ export function InteractivePreview() {
           <div className="flex justify-end pt-2">
             <Link
               href="/music"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
             >
               <Music className="w-4 h-4" />
               <span>Create Song</span>
@@ -210,7 +224,7 @@ export function InteractivePreview() {
           <div className="flex justify-end">
             <Link
               href="/voice"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md"
             >
               <span>Explore Voiceover Studio</span>
               <ArrowRight className="w-4 h-4" />

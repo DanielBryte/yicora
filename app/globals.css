@@ -2,23 +2,23 @@
 
 @layer base {
   :root {
-    --background: #F7F6F4;
+    --background: #F8F7F4;
     --foreground: #171717;
     
-    --burgundy: #2E0219;
-    --burgundy-deep: #1A000E;
-    --burgundy-light: #4A052A;
+    --burgundy: #23001E;
+    --burgundy-deep: #160013;
+    --burgundy-light: #380030;
 
-    --berry: #B72E63;
-    --berry-hover: #9E2452;
+    --berry: #B8235D;
+    --berry-hover: #9A1A4B;
 
     --card: #FFFFFF;
     --card-foreground: #171717;
 
-    --muted: #737373;
-    --muted-bg: #F0EEEA;
+    --muted: #6B6A68;
+    --muted-bg: #ECEAE5;
 
-    --border: #E5E2DC;
+    --border: #E3E0DB;
 
     --radius-xl: 1.5rem;
     --radius-2xl: 2rem;
@@ -26,14 +26,17 @@
 }
 
 @theme {
-  --color-burgundy: #2E0219;
-  --color-burgundy-deep: #1A000E;
-  --color-burgundy-light: #4A052A;
-  --color-berry: #B72E63;
-  --color-berry-hover: #9E2452;
-  --color-offwhite: #F7F6F4;
+  --color-burgundy: #23001E;
+  --color-burgundy-deep: #160013;
+  --color-burgundy-light: #380030;
+  --color-berry: #B8235D;
+  --color-berry-hover: #9A1A4B;
+  --color-offwhite: #F8F7F4;
   --color-darktext: #171717;
-  --color-mutedtext: #737373;
+  --color-mutedtext: #6B6A68;
+  --color-preview-bg: #ECEAE5;
+  --color-preview-inner: #E2DFD9;
+  --color-preview-tab-bg: #DBD8D2;
 
   --font-heading: var(--font-ubuntu), sans-serif;
   --font-sans: var(--font-ubuntu-sans), sans-serif;
@@ -53,24 +56,24 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Glassmorphism helpers */
 .glass-nav {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(229, 226, 220, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .glass-card-dark {
-  background: rgba(46, 2, 25, 0.85);
+  background: rgba(35, 0, 30, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .bg-burgundy-gradient {
-  background: linear-gradient(180deg, #2E0219 0%, #1A000E 100%);
+  background: linear-gradient(180deg, #23001E 0%, #160013 100%);
 }
 
 .bg-burgundy-radial {
-  background: radial-gradient(circle at top center, #4A052A 0%, #2E0219 60%, #1A000E 100%);
+  background: #23001E;
 }
 
 /* Custom scrollbar */

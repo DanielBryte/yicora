@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/shared/logo";
 import { createClient } from "@/lib/supabase/client";
-import { Lock, Mail, ArrowRight, Globe } from "lucide-react";
+import { Lock, Mail, ArrowRight } from "lucide-react";
+import { GoogleIcon } from "@/components/shared/google-icon";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,7 +69,7 @@ export default function LoginPage() {
           type="button"
           className="w-full py-3 px-4 rounded-xl border border-neutral-200 hover:bg-neutral-50 font-medium text-sm text-darktext flex items-center justify-center gap-3 transition-colors mb-5 shadow-sm"
         >
-          <Globe className="w-4 h-4 text-berry" />
+          <GoogleIcon className="w-5 h-5" />
           <span>Continue with Google</span>
         </button>
 

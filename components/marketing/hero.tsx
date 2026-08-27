@@ -8,29 +8,28 @@ export function Hero() {
       {/* Subtle Background Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-berry/20 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto text-center relative z-10">
+      <div className="max-w-5xl mt-4 mx-auto text-center relative z-10">
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]">
           The AI localization infrastructure for African creative content.
         </h1>
 
         {/* Subheadline */}
-        <p className="mt-6 text-lg sm:text-xl text-neutral-300 max-w-3xl mx-auto font-normal leading-relaxed">
-          YiCORA helps African creators, filmmakers, musicians, brands and media companies create, translate and transform content across languages and audiences.
+        <p className="mt-5 text-sm sm:text-base text-neutral-300/90 max-w-2xl mx-auto font-normal leading-relaxed">
+          YiCORA helps African creators, filmmakers, musicians, brands and media companies transform one piece of content into multiple languages, voices and markets.
         </p>
 
         {/* CTAs */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-7 flex flex-row items-center justify-center gap-3">
           <Link
             href="/signup"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-darktext hover:bg-neutral-100 font-semibold text-base transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2"
+            className="px-6 py-2.5 rounded-[10px] bg-white text-darktext hover:bg-neutral-100 font-semibold text-xs sm:text-sm transition-all shadow-md active:scale-95 flex items-center justify-center gap-2"
           >
-            <span>Get Started for Free</span>
-            <ArrowRight className="w-4 h-4 text-berry" />
+            <span>Get started for free</span>
           </Link>
           <a
             href="#pricing"
-            className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-base border border-white/20 backdrop-blur-md transition-all text-center"
+            className="px-6 py-2.5 rounded-[10px] bg-transparent hover:bg-white/10 text-white font-medium text-xs sm:text-sm border border-white/60 transition-all text-center"
           >
             See Pricing
           </a>

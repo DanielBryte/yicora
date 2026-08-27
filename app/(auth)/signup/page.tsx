@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/shared/logo";
 import { createClient } from "@/lib/supabase/client";
-import { Lock, Mail, User, ArrowRight, Globe, Sparkles } from "lucide-react";
+import { Lock, Mail, User, ArrowRight } from "lucide-react";
+import { GoogleIcon } from "@/components/shared/google-icon";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -55,7 +56,7 @@ export default function SignupPage() {
             <Logo />
           </div>
           <h1 className="text-2xl font-bold text-darktext tracking-tight">Create your account</h1>
-          <p className="text-sm text-neutral-500 mt-1">Get 50 free credits instantly to process audio & video</p>
+          <p className="text-sm text-neutral-500 mt-1">Sign up to get started with YiCORA</p>
         </div>
 
         {error && (
@@ -69,7 +70,7 @@ export default function SignupPage() {
           type="button"
           className="w-full py-3 px-4 rounded-xl border border-neutral-200 hover:bg-neutral-50 font-medium text-sm text-darktext flex items-center justify-center gap-3 transition-colors mb-5 shadow-sm"
         >
-          <Globe className="w-4 h-4 text-berry" />
+          <GoogleIcon className="w-5 h-5" />
           <span>Sign up with Google</span>
         </button>
 
@@ -128,11 +129,6 @@ export default function SignupPage() {
                 className="w-full pl-10 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berry/30 focus:border-berry text-darktext"
               />
             </div>
-          </div>
-
-          <div className="p-3 bg-pink-50 rounded-xl flex items-center gap-2 text-xs text-berry font-medium">
-            <Sparkles className="w-4 h-4 shrink-0" />
-            <span>Includes 50 bonus credits on registration</span>
           </div>
 
           <button

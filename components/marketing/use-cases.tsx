@@ -51,10 +51,9 @@ export function UseCases() {
 
           <Link
             href="/signup"
-            className="self-start md:self-auto px-6 py-3 rounded-full bg-berry hover:bg-berry-hover text-white font-medium text-sm transition-all shadow-md flex items-center gap-2"
+            className="self-start md:self-auto px-5 py-2.5 rounded-xl bg-berry hover:bg-berry-hover text-white font-medium text-xs sm:text-sm transition-all shadow-md active:scale-95"
           >
             <span>Start Creating</span>
-            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -63,7 +62,7 @@ export function UseCases() {
           {USE_CASES.map((uc, index) => (
             <div
               key={index}
-              className="group relative h-[380px] rounded-3xl overflow-hidden shadow-lg border border-neutral-200/80 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer"
+              className="group relative h-[450px] sm:h-[480px] rounded-[2rem] overflow-hidden shadow-lg border border-neutral-200/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer"
             >
               {/* Background Image */}
               <img
@@ -73,14 +72,14 @@ export function UseCases() {
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-darktext via-darktext/50 to-transparent opacity-85 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
               {/* Card Content */}
               <div className="absolute inset-0 p-7 flex flex-col justify-end text-white">
-                <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:text-pink-300 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-2 text-white">
                   {uc.title}
                 </h3>
-                <p className="text-sm text-neutral-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-normal">
                   {uc.description}
                 </p>
               </div>
@@ -89,7 +88,7 @@ export function UseCases() {
         </div>
 
         <div className="text-center mt-12">
-          <span className="text-sm font-semibold tracking-wide text-neutral-500 uppercase">
+          <span className="text-xs sm:text-sm font-medium tracking-wide text-neutral-600">
             and more...
           </span>
         </div>
