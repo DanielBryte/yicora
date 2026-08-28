@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/shared/logo";
-import { LayoutDashboard, Video, Mic, Music, FolderKanban, CreditCard, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Video, Mic, Music, FolderKanban, CreditCard, Settings, LogOut, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 const NAV_ITEMS = [
@@ -50,10 +50,10 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="pt-6 border-t border-neutral-200">
+      <div className="pt-4 border-t border-neutral-200">
         <Link
           href="/"
-          className="flex items-center gap-3 px-4 py-3 rounded-2xl text-neutral-600 hover:text-red-600 hover:bg-red-50 font-medium text-sm transition-colors"
+          className="flex items-center gap-3 px-4 py-2.5 rounded-2xl text-neutral-600 hover:text-red-600 hover:bg-red-50 font-medium text-xs transition-colors"
         >
           <LogOut className="w-4 h-4" />
           <span>Exit Studio</span>

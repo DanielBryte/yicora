@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/shared/logo";
 import { createClient } from "@/lib/supabase/client";
+import { getSiteUrl } from "@/lib/utils/url";
 import { Lock, Mail, ArrowRight } from "lucide-react";
 import { GoogleIcon } from "@/components/shared/google-icon";
 
@@ -41,9 +42,10 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     const supabase = createClient();
+    const siteUrl = getSiteUrl();
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${siteUrl}/auth/callback?next=/dashboard` },
     });
   };
 

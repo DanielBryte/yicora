@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/components/shared/logo";
 import { createClient } from "@/lib/supabase/client";
+import { getSiteUrl } from "@/lib/utils/url";
 import { Lock, Mail, User, ArrowRight } from "lucide-react";
 import { GoogleIcon } from "@/components/shared/google-icon";
 
@@ -22,6 +23,7 @@ export default function SignupPage() {
     setError(null);
 
     const supabase = createClient();
+    const siteUrl = getSiteUrl();
     const { error: authError } = await supabase.auth.signUp({
       email,
       password,
@@ -29,6 +31,7 @@ export default function SignupPage() {
         data: {
           full_name: fullName,
         },
+        emailRedirectTo: `${siteUrl}/auth/callback?next=/dashboard`,
       },
     });
 
@@ -42,9 +45,10 @@ export default function SignupPage() {
 
   const handleGoogleSignup = async () => {
     const supabase = createClient();
+    const siteUrl = getSiteUrl();
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${siteUrl}/auth/callback?next=/dashboard` },
     });
   };
 
