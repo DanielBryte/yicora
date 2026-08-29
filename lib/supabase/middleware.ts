@@ -6,21 +6,16 @@ export async function updateSession(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
-  // Fail-safe handler: If OAuth or Email login returns a `code` query parameter
-  // to the root URL or any non-callback route (e.g., when Supabase Dashboard Site URL fallback triggers),
-  // automatically forward to /auth/callback so the authorization code is exchanged for a session.
+  // Fail-safe: If Supabase falls back to the Site URL (e.g. /?code=...) instead of /auth/callback,
+  // intercept the code here and forward it to the proper exchange route.
   if (code && !requestUrl.pathname.startsWith("/auth/callback")) {
     const callbackUrl = new URL("/auth/callback", request.url);
     callbackUrl.searchParams.set("code", code);
-    if (!callbackUrl.searchParams.has("next")) {
-      callbackUrl.searchParams.set("next", "/dashboard");
-    }
+    callbackUrl.searchParams.set("next", requestUrl.searchParams.get("next") || "/dashboard");
     return NextResponse.redirect(callbackUrl);
   }
 
-  let supabaseResponse = NextResponse.next({
-    request,
-  });
+  let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder-yicora.supabase.co",
@@ -32,9 +27,7 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          supabaseResponse = NextResponse.next({
-            request,
-          });
+          supabaseResponse = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           );
@@ -43,7 +36,6 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Refresh auth token if needed
   await supabase.auth.getUser();
 
   return supabaseResponse;
