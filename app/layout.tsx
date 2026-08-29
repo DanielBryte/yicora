@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Ubuntu, Ubuntu_Sans } from "next/font/google";
+import { AuthCodeListener } from "@/components/shared/auth-code-listener";
 import "./globals.css";
 
 const ubuntu = Ubuntu({
@@ -33,6 +35,9 @@ export default function RootLayout({
       className={`${ubuntu.variable} ${ubuntuSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-offwhite text-darktext">
+        <Suspense fallback={null}>
+          <AuthCodeListener />
+        </Suspense>
         {children}
       </body>
     </html>
