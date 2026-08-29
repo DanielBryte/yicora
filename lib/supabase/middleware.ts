@@ -6,12 +6,17 @@ export async function updateSession(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
 
-  // Fail-safe: If Supabase falls back to the Site URL (e.g. /?code=...) instead of /auth/callback,
-  // intercept the code here and forward it to the proper exchange route.
+  // Intercept OAuth fallback: when Supabase's Site URL fallback sends /?code=...
+  // (happens when the redirectTo URL is not in Supabase's Redirect URL allowlist),
+  // catch it here and forward to the proper exchange handler.
   if (code && !requestUrl.pathname.startsWith("/auth/callback")) {
+    console.log("[proxy] Intercepted auth code at non-callback path:", requestUrl.pathname, "→ forwarding to /auth/callback");
     const callbackUrl = new URL("/auth/callback", request.url);
     callbackUrl.searchParams.set("code", code);
-    callbackUrl.searchParams.set("next", requestUrl.searchParams.get("next") || "/dashboard");
+    callbackUrl.searchParams.set(
+      "next",
+      requestUrl.searchParams.get("next") || "/dashboard"
+    );
     return NextResponse.redirect(callbackUrl);
   }
 
