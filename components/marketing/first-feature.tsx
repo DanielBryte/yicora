@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { useRef, useState, type KeyboardEvent } from "react";
 import {
   ArrowRight,
@@ -210,21 +211,38 @@ export function FirstFeature() {
   }
 
   return (
-    <section id="video-dubbing" className="bg-offwhite px-4 py-16 sm:py-20 lg:py-24">
+    <motion.section
+      id="video-dubbing"
+      className="bg-offwhite px-4 py-16 sm:py-20 lg:py-24"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
+        <motion.div
+          className="mx-auto mb-8 max-w-3xl text-center sm:mb-10"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl font-bold leading-tight tracking-tight text-darktext sm:text-4xl lg:text-[2.75rem]">
             Pick a tool. Bring your next idea to life.
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base">
             Start with video dubbing, then explore the voice and music tools in YiCORA’s first release.
           </p>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           role="tablist"
           aria-label="YiCORA launch features"
           className="mx-auto mb-6 grid max-w-5xl grid-cols-2 gap-1.5 rounded-2xl border border-neutral-200 bg-white p-1.5 shadow-sm sm:mb-8 sm:rounded-full sm:p-2 lg:grid-cols-4"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.08, ease: "easeOut" }}
         >
           {FEATURES.map((item, index) => {
             const Icon = item.icon;
@@ -257,14 +275,18 @@ export function FirstFeature() {
               </button>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
           id={`${feature.id}-panel`}
           role="tabpanel"
           aria-labelledby={`${feature.id}-tab`}
           tabIndex={0}
           className="relative isolate overflow-hidden rounded-3xl bg-[#17131b] text-white shadow-[0_24px_80px_-32px_rgba(31,12,56,0.45)] outline-none focus-visible:ring-2 focus-visible:ring-berry sm:rounded-[2rem]"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
         >
           <div className="pointer-events-none absolute -right-24 -top-36 -z-10 h-[28rem] w-[28rem] rounded-full bg-violet-600/20 blur-[100px]" />
           <div className="pointer-events-none absolute -bottom-48 left-1/3 -z-10 h-[24rem] w-[24rem] rounded-full bg-fuchsia-700/15 blur-[100px]" />
@@ -357,8 +379,8 @@ export function FirstFeature() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 
 const PRICING_PLANS = [
@@ -50,23 +53,51 @@ const PRICING_PLANS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-24 px-4 bg-offwhite text-darktext">
+    <motion.section
+      id="pricing"
+      className="py-24 px-4 bg-offwhite text-darktext"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
       <div className="mx-auto max-w-6xl text-center">
-        <span className="text-xs font-bold uppercase tracking-widest text-berry block mb-2">
+        <motion.span
+          className="text-xs font-bold uppercase tracking-widest text-berry block mb-2"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           PRICING
-        </span>
-        <h2 className="text-3xl font-bold tracking-tight text-darktext sm:text-4xl lg:text-5xl">
+        </motion.span>
+        <motion.h2
+          className="text-3xl font-bold tracking-tight text-darktext sm:text-4xl lg:text-5xl"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.05, ease: "easeOut" }}
+        >
           One price. No subscription.
-        </h2>
-        <p className="mx-auto mt-2 max-w-2xl text-xs text-mutedtext sm:text-sm">
+        </motion.h2>
+        <motion.p
+          className="mx-auto mt-2 max-w-2xl text-xs text-mutedtext sm:text-sm"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+        >
           Simple, transparent credit packs to process video, voice, and music on demand.
-        </p>
+        </motion.p>
 
-        {/* Pricing Cards Grid */}
         <div className="mt-12 grid grid-cols-1 items-stretch gap-6 text-left sm:mt-14 md:grid-cols-2 xl:mt-16 xl:grid-cols-3">
           {PRICING_PLANS.map((plan, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
               className={`relative flex min-h-[440px] flex-col justify-between rounded-[1.75rem] p-6 transition-all duration-300 sm:rounded-[2rem] sm:p-8 lg:p-9 ${
                 plan.popular
                   ? "z-[1] border border-[#cbb3ff] bg-[#f7f1ff] text-[#211638] shadow-[0_20px_60px_rgba(91,48,153,0.14)] xl:scale-[1.025]"
@@ -137,10 +168,10 @@ export function Pricing() {
                   Get Started
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

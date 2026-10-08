@@ -1,15 +1,36 @@
+"use client";
+
 import Link from "next/link";
-import { InteractivePreview } from "./interactive-preview";
+import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { InteractivePreview } from "./interactive-preview";
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section className="relative flex w-full flex-col items-center overflow-hidden px-4 pb-10 pt-6 text-white sm:pb-16 sm:pt-8 lg:pb-20">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute left-[7%] top-[10%] h-56 w-56 rounded-full bg-violet-500/18 blur-3xl"
+          animate={reduceMotion ? { opacity: 0.4 } : { x: [0, 18, 0], y: [0, -14, 0], opacity: [0.35, 0.7, 0.35] }}
+          transition={{ duration: 12, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[8%] top-[12%] h-72 w-72 rounded-full bg-fuchsia-400/12 blur-3xl"
+          animate={reduceMotion ? { opacity: 0.4 } : { x: [0, -22, 0], y: [0, 18, 0], opacity: [0.3, 0.55, 0.3] }}
+          transition={{ duration: 14, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        />
+      </div>
+
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center text-center">
-        <div
+        <motion.div
           role="group"
           aria-label="Used by more than 300,000 creators"
           className="mx-auto mb-5 inline-flex w-fit self-center items-center gap-2.5 text-left sm:mb-6"
+          initial={{ opacity: 0, y: 18, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="flex shrink-0 -space-x-2" aria-hidden="true">
             {[
@@ -34,38 +55,76 @@ export function Hero() {
             <span className="font-semibold text-white">300,000</span>
             <span className="ml-1">creators using YiCORA</span>
           </p>
-        </div>
+        </motion.div>
 
-        <h1 className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">
+        <motion.h1
+          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+        >
           The AI localization infrastructure for <span className="whitespace-nowrap">creative content.</span>
-        </h1>
+        </motion.h1>
 
-        <p className="mx-auto mt-4 w-full max-w-2xl text-sm font-normal leading-relaxed text-white/75 sm:text-base lg:text-lg">
+        <motion.p
+          className="mx-auto mt-4 w-full max-w-2xl text-sm font-normal leading-relaxed text-white/75 sm:text-base lg:text-lg"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+        >
           Dub videos, turn scripts into natural speech, and create voice-overs in Yoruba, Igbo, Hausa, Swahili, and Nigerian Pidgin. Choose a tool below to try it.
-        </p>
+        </motion.p>
 
-        <div className="mt-7 flex w-full max-w-lg flex-row items-center justify-center gap-3 sm:mt-8">
-          <a
+        <motion.div
+          className="mt-7 flex w-full max-w-lg flex-row items-center justify-center gap-3 sm:mt-8"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.a
             href="#preview"
-            className="inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-berry px-3 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-900/20 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-berry-hover hover:shadow-xl hover:shadow-violet-950/25 active:translate-y-0 active:scale-[.98] sm:flex-none sm:px-6"
+            whileHover={reduceMotion ? undefined : { y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex min-h-11 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-berry px-3 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-900/20 transition-all duration-200 ease-out hover:bg-berry-hover hover:shadow-xl hover:shadow-violet-950/25 sm:flex-none sm:px-6"
           >
             Try It Out
-            <Sparkles className="h-4 w-4" aria-hidden="true" />
-          </a>
-          <Link
-            href="/signup"
-            className="inline-flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full border border-[#d9c7ff] bg-[#eee6ff] px-3 py-2.5 text-center text-sm font-medium text-[#35135f] shadow-sm shadow-violet-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-[#e9dcff] hover:shadow-md active:translate-y-0 active:scale-[.98] sm:flex-none sm:px-5"
+            <motion.span
+              animate={reduceMotion ? undefined : { rotate: [0, 10, 0] }}
+              transition={{ duration: 1.6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+            >
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+            </motion.span>
+          </motion.a>
+          <motion.div whileHover={reduceMotion ? undefined : { y: -2 }} whileTap={{ scale: 0.98 }}>
+            <Link
+              href="/signup"
+              className="inline-flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full border border-[#d9c7ff] bg-[#eee6ff] px-3 py-2.5 text-center text-sm font-medium text-[#35135f] shadow-sm shadow-violet-900/10 transition-all duration-200 ease-out hover:bg-[#e9dcff] hover:shadow-md sm:flex-none sm:px-5"
+            >
+              Sign up free
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="w-full self-center"
+          initial={{ opacity: 0, y: 26 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.div
+            animate={reduceMotion ? undefined : { y: [0, -8, 0], rotate: [0, 0.8, 0] }}
+            transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
           >
-            Sign up free
-          </Link>
-        </div>
+            <InteractivePreview />
+          </motion.div>
+        </motion.div>
 
-        {/* Embedded Interactive Product Preview */}
-        <div className="w-full self-center">
-          <InteractivePreview />
-        </div>
-
-        <div className="mx-auto mt-9 w-full max-w-5xl border-t border-white/10 pt-6 text-center sm:mt-11 sm:pt-7">
+        <motion.div
+          className="mx-auto mt-9 w-full max-w-5xl border-t border-white/10 pt-6 text-center sm:mt-11 sm:pt-7"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="text-xs font-medium tracking-wide text-white/65 sm:text-sm">
             Made for creators, studios, and brands carrying African stories further.
           </p>
@@ -77,7 +136,7 @@ export function Hero() {
             ))}
           </div>
           <span className="mt-2 block text-[9px] uppercase tracking-[0.16em] text-white/30">Illustrative sample brands</span>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

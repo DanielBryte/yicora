@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 const USE_CASES = [
@@ -42,10 +45,23 @@ const USE_CASES = [
 
 export function UseCases() {
   return (
-    <section id="use-cases" className="bg-offwhite px-4 py-16 sm:py-20 lg:py-24">
+    <motion.section
+      id="use-cases"
+      className="bg-offwhite px-4 py-16 sm:py-20 lg:py-24"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
       <div className="mx-auto w-full max-w-7xl">
         {/* Header */}
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:mb-10 md:flex-row md:items-end lg:mb-12">
+        <motion.div
+          className="mb-8 flex flex-col justify-between gap-4 sm:mb-10 md:flex-row md:items-end lg:mb-12"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-darktext sm:text-4xl lg:text-5xl">
               YiCora Use Cases
@@ -61,46 +77,54 @@ export function UseCases() {
           >
             <span>Start Creating</span>
           </Link>
-        </div>
+        </motion.div>
 
         {/* Use Cases Cards Grid */}
         <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {USE_CASES.map((uc, index) => (
-            <Link
+            <motion.div
               key={index}
-              href={uc.href}
-              className="group relative flex h-[440px] cursor-pointer flex-col justify-end overflow-hidden rounded-[1.5rem] border border-neutral-200/60 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[470px] xl:h-[500px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.07, ease: "easeOut" }}
             >
-              {/* Background Image */}
-              <img
-                src={uc.image}
-                alt={uc.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/55 opacity-85 group-hover:opacity-95 transition-opacity" />
-
-              {/* Card Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-6">
-                <h3 className="mb-2 flex items-center justify-between gap-3 text-[1.05rem] font-bold tracking-tight text-white sm:text-[1.2rem]">
-                  <span className={uc.title === "Creative & content teams" ? "whitespace-nowrap text-[clamp(0.9rem,2.6vw,1.2rem)]" : ""}>{uc.title}</span>
-                  <ArrowUpRight className="h-4 w-4 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true" />
-                </h3>
-                <p className="max-w-[30ch] text-[11px] leading-relaxed text-neutral-300 sm:text-xs">
-                  {uc.description}
-                </p>
-              </div>
-            </Link>
+              <Link
+                href={uc.href}
+                className="group relative flex h-[440px] cursor-pointer flex-col justify-end overflow-hidden rounded-[1.5rem] border border-neutral-200/60 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[470px] xl:h-[500px]"
+              >
+                <img
+                  src={uc.image}
+                  alt={uc.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/55 opacity-85 group-hover:opacity-95 transition-opacity" />
+                <div className="absolute inset-0 flex flex-col justify-end p-5 text-white sm:p-6">
+                  <h3 className="mb-2 flex items-center justify-between gap-3 text-[1.05rem] font-bold tracking-tight text-white sm:text-[1.2rem]">
+                    <span className={uc.title === "Creative & content teams" ? "whitespace-nowrap text-[clamp(0.9rem,2.6vw,1.2rem)]" : ""}>{uc.title}</span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true" />
+                  </h3>
+                  <p className="max-w-[30ch] text-[11px] leading-relaxed text-neutral-300 sm:text-xs">
+                    {uc.description}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+        >
           <span className="text-xs sm:text-sm font-medium tracking-wide text-neutral-600">
             and more...
           </span>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
