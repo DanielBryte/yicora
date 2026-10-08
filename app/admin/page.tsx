@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { AdminSidebar, ADMIN_NAV_ITEMS } from "@/components/admin/admin-sidebar";
 import { AdminTopBar } from "@/components/admin/admin-topbar";
 import { AdminStats } from "@/components/admin/admin-stats";
 import { UserManagement } from "@/components/admin/user-management";
@@ -21,7 +21,24 @@ export default function AdminDashboardPage() {
       <div className="flex-1 flex flex-col min-w-0">
         <AdminTopBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        <main className="flex-1 p-6 space-y-6 max-w-7xl w-full mx-auto">
+        <nav aria-label="Admin sections" className="flex gap-1 overflow-x-auto border-b border-neutral-200 bg-white px-3 py-2 md:hidden">
+          {ADMIN_NAV_ITEMS.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setActiveTab(id)}
+              aria-current={activeTab === id ? "page" : undefined}
+              className={`inline-flex min-h-10 shrink-0 items-center gap-2 rounded-xl px-3 text-xs font-semibold transition ${
+                activeTab === id ? "bg-berry text-white" : "text-neutral-600 hover:bg-violet-50 hover:text-berry"
+              }`}
+            >
+              <Icon className="h-4 w-4" aria-hidden="true" />
+              {label}
+            </button>
+          ))}
+        </nav>
+
+        <main className="mx-auto w-full max-w-7xl flex-1 space-y-6 p-4 sm:p-6">
           {activeTab === "overview" && (
             <div className="space-y-6 animate-in fade-in duration-200">
               <AdminStats />

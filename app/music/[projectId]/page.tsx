@@ -4,7 +4,7 @@ import { use, useState } from "react";
 import DashboardLayout from "@/app/dashboard/layout";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { VariationModal } from "@/components/music/variation-modal";
-import { Play, Pause, Download, Sparkles, RefreshCw, Trash2, ArrowLeft, Disc, Music, FileText, Settings } from "lucide-react";
+import { Play, Pause, Download, Sparkles, RefreshCw, Trash2, ArrowLeft, Disc, Music, FileText } from "lucide-react";
 import Link from "next/link";
 
 export default function MusicProjectDetailsPage({
@@ -63,10 +63,10 @@ export default function MusicProjectDetailsPage({
         </div>
 
         {/* Hero Music Player Card */}
-        <div className="bg-burgundy rounded-3xl p-6 sm:p-8 text-white shadow-2xl space-y-6 relative overflow-hidden">
+        <div className="space-y-6 rounded-2xl border border-neutral-200 bg-white p-5 sm:p-7">
           <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
             {/* Artwork */}
-            <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden shadow-2xl shrink-0 border border-white/20 relative group">
+              <div className="relative h-36 w-36 shrink-0 overflow-hidden rounded-xl border border-neutral-200 sm:h-44 sm:w-44">
               <img src={song.coverArtUrl} alt={song.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <Disc className="w-10 h-10 text-white animate-spin" />
@@ -79,13 +79,13 @@ export default function MusicProjectDetailsPage({
                 <span className="px-3 py-1 rounded-full bg-berry text-white font-bold text-xs uppercase tracking-wider">
                   {song.genre}
                 </span>
-                <span className="px-3 py-1 rounded-full bg-white/10 text-pink-200 font-semibold text-xs border border-white/10">
+                <span className="rounded-md border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-semibold text-neutral-700">
                   {song.mood}
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-white">{song.title}</h1>
-              <p className="text-xs text-neutral-300">
+              <h1 className="text-2xl font-bold tracking-tight text-darktext sm:text-4xl">{song.title}</h1>
+              <p className="text-xs text-neutral-500">
                 Language: {song.language} • {song.bpm} BPM • Duration: {song.duration}
               </p>
 
@@ -99,10 +99,10 @@ export default function MusicProjectDetailsPage({
                 </button>
 
                 <div className="flex-1 space-y-1.5">
-                  <div className="h-3 bg-white/10 rounded-full overflow-hidden relative cursor-pointer">
-                    <div className="h-full bg-pink-400 w-2/5 rounded-full" />
+                  <div className="relative h-2 cursor-pointer overflow-hidden rounded-full bg-neutral-100">
+                    <div className="h-full w-2/5 rounded-full bg-berry" />
                   </div>
-                  <div className="flex justify-between text-xs text-neutral-300 font-mono">
+                  <div className="flex justify-between font-mono text-xs text-neutral-500">
                     <span>1:06</span>
                     <span>{song.duration}</span>
                   </div>
@@ -112,12 +112,12 @@ export default function MusicProjectDetailsPage({
           </div>
 
           {/* Action Row */}
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+          <div className="flex flex-col items-center justify-between gap-4 border-t border-neutral-200 pt-5 sm:flex-row">
             <button
               onClick={() => setShowVariationModal(true)}
-              className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/20 backdrop-blur-md flex items-center justify-center gap-2 transition-all"
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 sm:w-auto"
             >
-              <Sparkles className="w-4 h-4 text-pink-300" />
+              <Sparkles className="h-4 w-4 text-berry" />
               <span>Create Variation</span>
             </button>
 
@@ -125,7 +125,7 @@ export default function MusicProjectDetailsPage({
               <a
                 href={song.audioUrl}
                 download
-                className="w-full sm:w-auto px-7 py-3 rounded-full bg-berry hover:bg-berry-hover text-white text-xs font-bold flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-berry px-5 py-2.5 text-sm font-semibold text-white hover:bg-berry-hover sm:w-auto"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Master Audio</span>

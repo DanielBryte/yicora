@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Upload, Video, Sparkles, CheckCircle2, Link as LinkIcon } from "lucide-react";
+import { Upload, Video, Sparkles, Link as LinkIcon } from "lucide-react";
 import { getVideoProvider } from "@/lib/providers/video";
 
 const AFRICAN_LANGUAGES = [

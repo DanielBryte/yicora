@@ -29,7 +29,7 @@ export function Logo({ className, variant = "dark", height = 32 }: LogoProps) {
       ) : (
         /* Fallback if user replaces file with custom format or non-existent path */
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-berry to-burgundy flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
+          <div className="w-8 h-8 rounded-xl bg-[#7c4bd6] flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-105 transition-transform">
             Y
           </div>
           <span

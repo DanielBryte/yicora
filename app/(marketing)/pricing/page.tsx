@@ -4,8 +4,10 @@ import { MarketingFooter } from "@/components/marketing/footer";
 
 export default function PricingPage() {
   return (
-    <main className="min-h-screen bg-white pt-24 flex flex-col font-sans">
-      <MarketingNavbar />
+    <main className="flex min-h-screen flex-col bg-white font-sans">
+      <div className="brand-masthead">
+        <MarketingNavbar />
+      </div>
       <Pricing />
       <MarketingFooter />
     </main>

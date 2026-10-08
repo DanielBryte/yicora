@@ -4,8 +4,10 @@ import { MarketingFooter } from "@/components/marketing/footer";
 
 export default function UseCasesPage() {
   return (
-    <main className="min-h-screen bg-offwhite pt-24 flex flex-col font-sans">
-      <MarketingNavbar />
+    <main className="flex min-h-screen flex-col bg-offwhite font-sans">
+      <div className="brand-masthead">
+        <MarketingNavbar />
+      </div>
       <UseCases />
       <MarketingFooter />
     </main>

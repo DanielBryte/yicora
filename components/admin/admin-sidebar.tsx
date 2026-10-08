@@ -20,7 +20,7 @@ interface AdminSidebarProps {
   setActiveTab: (tab: string) => void;
 }
 
-const ADMIN_NAV_ITEMS = [
+export const ADMIN_NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "users", label: "Users & Credits", icon: Users },
   { id: "queue", label: "Task Queue", icon: Cpu },

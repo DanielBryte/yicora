@@ -1,65 +1,45 @@
 import Link from "next/link";
-import { Video, Mic, Music, ArrowRight } from "lucide-react";
+import { ArrowRight, Clapperboard, Coins, FolderKanban, Mic, Music, Sparkles } from "lucide-react";
 
 export function QuickActions() {
   const ACTIONS = [
-    {
-      title: "Create Video Dub",
-      description: "Localize video into Yoruba, Igbo, Hausa, Swahili & Pidgin.",
-      href: "/video",
-      icon: Video,
-      badge: "Video AI",
-      bg: "from-burgundy to-burgundy-light",
-    },
-    {
-      title: "Create Voice",
-      description: "Generate lifelike speech with authentic African voice presets.",
-      href: "/voice",
-      icon: Mic,
-      badge: "Voice AI",
-      bg: "from-neutral-900 to-neutral-800",
-    },
-    {
-      title: "Create Music",
-      description: "Compose Afrobeats, Amapiano & highlife with YiCORA Music Box.",
-      href: "/music",
-      icon: Music,
-      badge: "Music Box",
-      bg: "from-berry to-burgundy-light",
-    },
+    { title: "Video Dubbing", description: "Translate and dub videos across African languages.", href: "/video", icon: Clapperboard },
+    { title: "Voice Studio", description: "Turn scripts into expressive, local-ready narration.", href: "/voice", icon: Mic },
+    { title: "Music Box", description: "Compose branded songs and radio-ready tracks.", href: "/music", icon: Music },
+    { title: "Billing & Credits", description: "Manage your balance and credit packs.", href: "/billing", icon: Coins },
+    { title: "Projects", description: "Track every generation and export in one place.", href: "/projects", icon: FolderKanban },
+    { title: "Settings", description: "Manage your profile and account preferences.", href: "/settings", icon: Sparkles },
   ];
 
   return (
-    <div className="space-y-3">
-      <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-500">
-        Quick Actions
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div className="space-y-5">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-500">Quick access</h2>
+        <div className="hidden items-center gap-2 text-xs font-medium text-neutral-500 sm:flex">
+          <span className="rounded-full border border-neutral-200 bg-white px-2.5 py-1">Popular</span>
+          <span className="rounded-full border border-neutral-200 bg-white px-2.5 py-1">Recent</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {ACTIONS.map((action, index) => {
           const Icon = action.icon;
           return (
             <Link
-              key={index}
+              key={action.href}
               href={action.href}
-              className={`group relative p-6 rounded-3xl bg-gradient-to-br ${action.bg} text-white shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col justify-between h-[200px]`}
+              className="group flex min-h-[132px] flex-col justify-between rounded-[24px] border border-neutral-200 bg-white p-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-[#d9c0ff]"
             >
-              <div className="flex items-start justify-between">
-                <div className="w-10 h-10 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
-                  <Icon className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-white/10 text-pink-200 border border-white/10">
-                  {action.badge}
-                </span>
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#f1ebff] text-[#5d3ab7]">
+                <Icon className="h-4 w-4" />
               </div>
 
               <div>
-                <h3 className="text-xl font-bold tracking-tight mb-1 group-hover:text-pink-200 transition-colors flex items-center justify-between">
-                  <span>{action.title}</span>
-                  <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                </h3>
-                <p className="text-xs text-neutral-300 leading-relaxed">
-                  {action.description}
-                </p>
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold text-darktext">{action.title}</h3>
+                  <ArrowRight className="h-3.5 w-3.5 text-neutral-400 transition-transform group-hover:translate-x-1 group-hover:text-[#d95ca8]" />
+                </div>
+                <p className="line-clamp-2 text-[11px] leading-relaxed text-neutral-500">{action.description}</p>
               </div>
             </Link>
           );

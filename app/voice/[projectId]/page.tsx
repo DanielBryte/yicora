@@ -71,10 +71,10 @@ export default function VoiceProjectDetailsPage({
         </div>
 
         {/* Professional Audio Player Container */}
-        <div className="bg-burgundy rounded-3xl p-8 text-white shadow-xl space-y-6">
+        <div className="space-y-6 rounded-2xl border border-neutral-200 bg-white p-5 sm:p-7">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-widest text-pink-300">Audio Preview</span>
-            <span className="text-xs text-neutral-300 font-mono">{voiceProject.durationSeconds} Seconds</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-600">Audio preview</span>
+            <span className="font-mono text-xs text-neutral-500">{voiceProject.durationSeconds} seconds</span>
           </div>
 
           <div className="flex items-center gap-6">
@@ -86,24 +86,24 @@ export default function VoiceProjectDetailsPage({
             </button>
 
             <div className="flex-1 space-y-2">
-              <div className="h-3 bg-white/10 rounded-full overflow-hidden relative cursor-pointer">
+              <div className="relative h-2 cursor-pointer overflow-hidden rounded-full bg-neutral-100">
                 <div className="h-full bg-berry w-1/3 rounded-full" />
               </div>
-              <div className="flex justify-between text-xs text-neutral-400 font-mono">
+              <div className="flex justify-between font-mono text-xs text-neutral-500">
                 <span>0:04</span>
                 <span>0:14</span>
               </div>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-            <span className="text-xs text-neutral-300">Format: Studio Lossless 48kHz WAV</span>
+          <div className="flex flex-col items-start justify-between gap-3 border-t border-neutral-200 pt-4 sm:flex-row sm:items-center">
+            <span className="text-xs text-neutral-500">Format: Studio Lossless 48kHz WAV</span>
             <a
               href={voiceProject.audioUrl}
               download
-              className="px-6 py-2.5 rounded-full bg-white text-darktext hover:bg-neutral-100 text-xs font-bold flex items-center gap-2 shadow-md transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-berry px-5 py-2.5 text-sm font-semibold text-white hover:bg-berry-hover"
             >
-              <Download className="w-4 h-4 text-berry" />
+              <Download className="w-4 h-4 text-white" />
               <span>Download Audio WAV</span>
             </a>
           </div>

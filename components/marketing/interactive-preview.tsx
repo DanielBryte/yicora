@@ -32,7 +32,7 @@ export function InteractivePreview() {
   const activeLangObj = LANGUAGES.find((l) => l.code === selectedLang) || LANGUAGES[0];
 
   return (
-    <div id="preview" className="w-full max-w-4xl mx-auto mt-12 bg-[#ECEAE5] rounded-[2.5rem] p-5 sm:p-7 shadow-2xl border border-white/60 text-darktext transition-all">
+    <div id="preview" className="mx-auto mt-7 w-full max-w-5xl scroll-mt-24 rounded-[1.5rem] border border-white/60 bg-[#ECEAE5] p-3.5 text-darktext shadow-xl transition-all sm:mt-10 sm:rounded-[2.5rem] sm:p-6 lg:p-7">
       {/* Tabs */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 p-1.5 bg-[#DBD8D2] rounded-2xl mb-6">
         {TABS.map((tab) => {
@@ -56,7 +56,7 @@ export function InteractivePreview() {
       {/* Tab 1: Video Dubbing */}
       {activeTab === "video-dubbing" && (
         <div className="space-y-5 animate-in fade-in duration-300">
-          <div className="border border-neutral-300/60 rounded-2xl p-12 bg-[#E2DFD9] text-center hover:border-berry/40 transition-colors cursor-pointer group">
+          <div className="group cursor-pointer rounded-2xl border border-neutral-300/60 bg-[#E2DFD9] p-6 text-center transition-colors hover:border-berry/40 sm:p-12">
             <div className="w-10 h-10 rounded-lg text-neutral-800 flex items-center justify-center mx-auto mb-2 group-hover:scale-105 transition-transform">
               <svg className="w-8 h-8 text-neutral-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 3h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z" />
@@ -86,8 +86,8 @@ export function InteractivePreview() {
             </div>
           </div>
 
-          <div className="pt-2 flex flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col items-stretch justify-between gap-3 pt-2 sm:flex-row sm:items-center sm:gap-4">
+            <div className="flex min-w-0 flex-wrap items-center gap-2">
               <span className="text-xs sm:text-sm font-normal text-neutral-700">Translate to:</span>
               <div className="relative inline-flex items-center">
                 <div className="bg-white border border-neutral-300/80 rounded-xl px-3.5 py-2.5 flex items-center gap-2.5 text-xs sm:text-sm font-medium text-darktext shadow-sm transition-all hover:bg-neutral-50">
@@ -115,7 +115,7 @@ export function InteractivePreview() {
 
             <Link
               href="/video"
-              className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-berry hover:bg-berry-hover text-white font-medium text-xs sm:text-sm transition-all shadow-md active:scale-95"
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-berry px-6 py-3 text-xs font-medium text-white shadow-md transition-all hover:bg-berry-hover active:scale-95 sm:w-auto sm:px-8 sm:text-sm"
             >
               <span>Translate video</span>
             </Link>

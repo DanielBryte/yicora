@@ -17,50 +17,53 @@ export function StatsOverview({
       value: totalProjects,
       unit: "created",
       icon: FolderKanban,
-      color: "text-burgundy",
-      bg: "bg-pink-50",
+      color: "text-violet-700",
+      bg: "bg-violet-50",
+      accent: "bg-violet-100 text-violet-700",
     },
     {
       label: "Minutes Processed",
       value: minutesCreated,
       unit: "mins",
       icon: Clock,
-      color: "text-berry",
-      bg: "bg-pink-50",
+      color: "text-violet-700",
+      bg: "bg-violet-50",
+      accent: "bg-violet-100 text-violet-700",
     },
     {
       label: "Credits Remaining",
       value: creditsRemaining,
       unit: "credits",
       icon: Coins,
-      color: "text-amber-600",
+      color: "text-amber-700",
       bg: "bg-amber-50",
+      accent: "bg-amber-100 text-amber-700",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
       {STATS.map((stat, index) => {
         const Icon = stat.icon;
         return (
           <div
             key={index}
-            className="p-6 bg-white rounded-3xl border border-neutral-200/80 shadow-sm flex items-center justify-between"
+            className="flex items-center justify-between rounded-[26px] border border-neutral-200/80 bg-white p-5 shadow-[0_10px_24px_rgba(23,19,31,0.03)] sm:p-6"
           >
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 block mb-1">
+              <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
                 {stat.label}
               </span>
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-darktext tracking-tight">
+                <span className="text-3xl font-extrabold tracking-[-0.06em] text-darktext">
                   {stat.value}
                 </span>
-                <span className="text-xs text-neutral-400 font-medium">{stat.unit}</span>
+                <span className="text-xs font-medium text-neutral-400">{stat.unit}</span>
               </div>
             </div>
 
-            <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center`}>
-              <Icon className="w-6 h-6" />
+            <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${stat.accent}`}>
+              <Icon className="h-5 w-5" />
             </div>
           </div>
         );

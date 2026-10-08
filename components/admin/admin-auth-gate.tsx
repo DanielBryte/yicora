@@ -78,8 +78,8 @@ export function AdminAuthGate({ children }: AdminAuthGateProps) {
     return (
       <div className="min-h-screen bg-[#0E000D] text-white flex items-center justify-center p-4 relative overflow-hidden font-sans">
         {/* Background Ambient Security Grids */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-berry/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[#0E000D] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#4b1e7a]/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="w-full max-w-md bg-[#180016]/90 backdrop-blur-2xl rounded-3xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.8)] border border-white/10 relative z-10 space-y-6">
           {/* Header Badge & Brand */}

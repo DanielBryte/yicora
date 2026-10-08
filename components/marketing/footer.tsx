@@ -3,64 +3,48 @@ import { Logo } from "@/components/shared/logo";
 
 export function MarketingFooter() {
   return (
-    <footer className="bg-[#23001C] text-white pt-20 pb-16 border-t border-white/5">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-10 sm:gap-12">
-          {/* Brand Info */}
-          <div className="md:col-span-2 space-y-3">
-            <Logo variant="light" />
-            <p className="text-xs sm:text-sm text-neutral-300 max-w-xs leading-relaxed font-normal">
-              The AI localization infrastructure for African creative content.
+    <footer className="relative isolate overflow-hidden border-t border-white/[0.08] bg-[#111014] text-white">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[#111014]" />
+      <div className="mx-auto max-w-7xl px-5 pb-8 pt-16 sm:px-8 sm:pt-20 lg:px-10">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-x-12">
+          <div className="col-span-2 max-w-sm space-y-5 sm:col-span-3 lg:col-span-1">
+            <Logo variant="light" height={36} />
+            <p className="max-w-xs text-sm leading-7 text-white/65">
+              Voice and video tools for stories that deserve to be heard in every language.
             </p>
           </div>
 
-          {/* Products Links */}
           <div className="space-y-4">
-            <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight">Products</h4>
-            <ul className="space-y-3 text-xs sm:text-sm text-neutral-300 font-normal">
-              <li><Link href="/video" className="hover:text-white transition-colors">AI Video Dubbing</Link></li>
-              <li><Link href="/voice" className="hover:text-white transition-colors">AI Text-to-Speech</Link></li>
-              <li><Link href="/voice" className="hover:text-white transition-colors">AI Voice Over</Link></li>
-              <li><Link href="/music" className="hover:text-white transition-colors">AI Music Box</Link></li>
-              <li><a href="#" className="hover:text-white transition-colors">AI Face Changer</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">AI Voice Clone</a></li>
+            <h2 className="text-sm font-semibold tracking-tight text-[#c89aff]">Products</h2>
+            <ul className="space-y-3 text-sm text-white/70">
+              <li><Link href="/video" className="transition-colors hover:text-white">Video dubbing</Link></li>
+              <li><Link href="/voice" className="transition-colors hover:text-white">Text to speech</Link></li>
+              <li><Link href="/voice" className="transition-colors hover:text-white">AI voice-over</Link></li>
+              <li><Link href="/music" className="transition-colors hover:text-white">AI Music Box</Link></li>
             </ul>
           </div>
 
-          {/* Company Links */}
           <div className="space-y-4">
-            <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight">Company</h4>
-            <ul className="space-y-3 text-xs sm:text-sm text-neutral-300 font-normal">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+            <h2 className="text-sm font-semibold tracking-tight text-[#c89aff]">Explore</h2>
+            <ul className="space-y-3 text-sm text-white/70">
+              <li><Link href="/use-cases" className="transition-colors hover:text-white">Use cases</Link></li>
+              <li><Link href="/#preview" className="transition-colors hover:text-white">Try the studio</Link></li>
+              <li><Link href="/pricing" className="transition-colors hover:text-white">Pricing</Link></li>
             </ul>
           </div>
 
-          {/* Resources Links */}
           <div className="space-y-4">
-            <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight">Resources</h4>
-            <ul className="space-y-3 text-xs sm:text-sm text-neutral-300 font-normal">
-              <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API Docs</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Feature Request</a></li>
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div className="space-y-4">
-            <h4 className="text-xs sm:text-sm font-semibold text-white tracking-tight">Legal</h4>
-            <ul className="space-y-3 text-xs sm:text-sm text-neutral-300 font-normal">
-              <li><a href="#" className="hover:text-white transition-colors">Terms of service</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Refund Policy</a></li>
+            <h2 className="text-sm font-semibold tracking-tight text-[#c89aff]">Get started</h2>
+            <ul className="space-y-3 text-sm text-white/70">
+              <li><Link href="/signup" className="transition-colors hover:text-white">Create an account</Link></li>
+              <li><Link href="/login" className="transition-colors hover:text-white">Log in</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 sm:mt-20 pt-8 sm:pt-10 border-t border-white/10 text-center text-[11px] sm:text-xs text-neutral-400 font-medium tracking-wide">
-          <p>© 2026 YiCORA. ALL RIGHTS RESERVED.</p>
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} YiCORA. All rights reserved.</p>
+          <p>Made for voices, stories, and sounds from everywhere.</p>
         </div>
       </div>
     </footer>

@@ -20,7 +20,7 @@ export function AdminTopBar({ onRefresh, searchQuery = "", setSearchQuery }: Adm
   }, []);
 
   return (
-    <header className="bg-white border-b border-neutral-200 px-6 py-3.5 sticky top-0 z-40">
+    <header className="sticky top-0 z-40 border-b border-neutral-200 bg-white px-3 py-3 sm:px-6 sm:py-3.5">
       <div className="flex items-center justify-between gap-4">
         {/* Simple Search Bar */}
         <div className="relative max-w-sm w-full">
@@ -35,15 +35,15 @@ export function AdminTopBar({ onRefresh, searchQuery = "", setSearchQuery }: Adm
         </div>
 
         {/* Right Info & Actions */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <div className="hidden items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 sm:flex">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
             <span>Operational</span>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-100 text-xs text-neutral-700 font-medium">
+          <div className="hidden min-w-0 max-w-[32vw] items-center gap-2 rounded-xl bg-neutral-100 px-3 py-1.5 text-xs font-medium text-neutral-700 sm:flex">
             <UserCheck className="w-3.5 h-3.5 text-berry" />
-            <span className="font-mono">{adminEmail}</span>
+            <span className="truncate font-mono">{adminEmail}</span>
           </div>
 
           {onRefresh && (

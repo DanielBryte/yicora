@@ -34,6 +34,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       projects: {
         Row: {
@@ -66,6 +67,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       video_generations: {
         Row: {
@@ -113,6 +115,7 @@ export interface Database {
           error_message?: string | null
           created_at?: string
         }
+        Relationships: []
       }
       voice_generations: {
         Row: {
@@ -160,6 +163,7 @@ export interface Database {
           error_message?: string | null
           created_at?: string
         }
+        Relationships: []
       }
       music_generations: {
         Row: {
@@ -225,6 +229,7 @@ export interface Database {
           error_message?: string | null
           created_at?: string
         }
+        Relationships: []
       }
       credit_transactions: {
         Row: {
@@ -251,6 +256,7 @@ export interface Database {
           description?: string
           created_at?: string
         }
+        Relationships: []
       }
       reference_uploads: {
         Row: {
@@ -277,7 +283,10 @@ export interface Database {
           analysis_json?: Json | null
           created_at?: string
         }
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
   }
 }

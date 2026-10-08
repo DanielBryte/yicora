@@ -54,7 +54,7 @@ export function MusicProcessingScreen({ onComplete }: ProcessingScreenProps) {
       <div className="space-y-2 max-w-md mx-auto">
         <div className="h-3 bg-white/10 rounded-full overflow-hidden p-0.5 border border-white/10">
           <div
-            className="h-full bg-gradient-to-r from-pink-400 to-berry rounded-full transition-all duration-500"
+            className="h-full bg-[#a864ff] rounded-full transition-all duration-500"
             style={{ width: `${progress}%` }}
           />
         </div>

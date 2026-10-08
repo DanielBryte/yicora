@@ -1,20 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Ubuntu, Ubuntu_Sans } from "next/font/google";
+import { Urbanist } from "next/font/google";
 import { AuthCodeListener } from "@/components/shared/auth-code-listener";
 import "./globals.css";
 
-const ubuntu = Ubuntu({
-  weight: ["400", "500", "700"],
+const urbanist = Urbanist({
+  weight: ["400", "500", "600", "700", "800"],
   subsets: ["latin"],
-  variable: "--font-ubuntu",
-  display: "swap",
-});
-
-const ubuntuSans = Ubuntu_Sans({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-ubuntu-sans",
+  variable: "--font-urbanist",
   display: "swap",
 });
 
@@ -22,6 +15,10 @@ export const metadata: Metadata = {
   title: "YiCORA — AI Localization & Creative Infrastructure for Africa",
   description:
     "YiCORA helps African creators, filmmakers, musicians, brands and media companies create, translate and transform content across languages and audiences.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -32,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ubuntu.variable} ${ubuntuSans.variable} h-full antialiased`}
+      className={`${urbanist.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-offwhite text-darktext">
         <Suspense fallback={null}>

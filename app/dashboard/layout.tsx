@@ -3,12 +3,15 @@ import { DashboardHeader } from "@/components/dashboard/header";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-offwhite flex font-sans text-darktext">
+    <div className="dashboard-shell relative min-h-screen overflow-hidden bg-[#f7f4fa] text-darktext">
       <Sidebar />
-      <div className="flex-1 flex flex-col min-w-0">
-        <DashboardHeader />
-        <main className="p-6 md:p-8 flex-1 max-w-7xl w-full mx-auto space-y-8">
-          {children}
+      <DashboardHeader />
+
+      <div className="relative z-10 flex min-h-screen flex-col md:pl-[252px]">
+        <main className="flex-1 overflow-y-auto pt-[76px] md:pt-[80px]">
+          <div className="dashboard-content mx-auto w-full max-w-[1440px] space-y-6 p-4 sm:p-6 md:space-y-8 md:p-8">
+            {children}
+          </div>
         </main>
       </div>
     </div>
