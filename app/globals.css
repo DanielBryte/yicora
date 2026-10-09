@@ -168,6 +168,10 @@ button:disabled {
   box-shadow: none;
 }
 
+.dashboard-shell a[aria-current="page"][class*="bg-berry"] {
+  border-radius: 9999px;
+}
+
 @media (hover: hover) {
   .dashboard-shell a:hover,
   .dashboard-shell button:not(:disabled):hover {

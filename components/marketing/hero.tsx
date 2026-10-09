@@ -111,12 +111,9 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div
-            animate={reduceMotion ? undefined : { y: [0, -8, 0], rotate: [0, 0.8, 0] }}
-            transition={{ duration: 7, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          >
+          <div className="w-full">
             <InteractivePreview />
-          </motion.div>
+          </div>
         </motion.div>
 
         <motion.div

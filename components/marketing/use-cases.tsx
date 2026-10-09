@@ -9,37 +9,37 @@ const USE_CASES = [
     title: "Video creators & publishers",
     description: "Use video dubbing to prepare existing clips for audiences in YiCORA’s supported languages.",
     href: "/video",
-    image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Scriptwriters & narrators",
     description: "Turn a written script into speech with YiCORA text-to-speech, then choose a voice that fits the read.",
     href: "/voice",
-    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Creative & content teams",
     description: "Create voice-over drafts for explainers, social clips, and campaign concepts in the voice studio.",
     href: "/voice",
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Music creators",
     description: "Build an original music idea from a prompt and shape it with the Music Box’s creative controls.",
     href: "/music",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Marketing teams",
     description: "Localize campaign assets across cultures, tones, and languages without sacrificing speed.",
     href: "/billing",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80",
   },
   {
     title: "Agencies & studios",
     description: "Ship cleaner, faster creative outputs across branded voice, video, and music workflows.",
     href: "/projects",
-    image: "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=600&auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80",
   },
 ];
 

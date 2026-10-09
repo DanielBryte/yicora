@@ -5,6 +5,8 @@ import { Sparkles, CheckCircle2, Loader2, Music } from "lucide-react";
 
 interface ProcessingScreenProps {
   onComplete: () => void;
+  onError: (message: string) => void;
+  jobId: string | null;
 }
 
 const STEPS = [
@@ -15,29 +17,42 @@ const STEPS = [
   "Finalizing your song",
 ];
 
-export function MusicProcessingScreen({ onComplete }: ProcessingScreenProps) {
+export function MusicProcessingScreen({ onComplete, onError, jobId }: ProcessingScreenProps) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [progress, setProgress] = useState(15);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentStepIndex((prev) => {
-        if (prev < STEPS.length - 1) {
-          const next = prev + 1;
-          setProgress(Math.round(((next + 1) / STEPS.length) * 100));
-          return next;
-        } else {
-          clearInterval(interval);
-          setTimeout(() => {
-            onComplete();
-          }, 800);
-          return prev;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    let polls = 0;
+    const poll = async () => {
+      if (!jobId) {
+        timer = setTimeout(poll, 400);
+        return;
+      }
+      try {
+        const response = await fetch(`/api/music/jobs/${jobId}`, { cache: "no-store" });
+        const job = await response.json();
+        if (!response.ok) throw new Error(job.error || "Could not check song status.");
+        if (cancelled) return;
+        if (job.status === "completed") {
+          setProgress(100);
+          setCurrentStepIndex(STEPS.length - 1);
+          timer = setTimeout(onComplete, 500);
+          return;
         }
-      });
-    }, 1200);
-
-    return () => clearInterval(interval);
-  }, [onComplete]);
+        if (job.status === "failed") throw new Error(job.error || "Song generation failed. Please try again.");
+        polls += 1;
+        setCurrentStepIndex(Math.min(STEPS.length - 1, Math.floor(polls / 3)));
+        setProgress(Math.min(90, 15 + polls * 3));
+        timer = setTimeout(poll, 3000);
+      } catch (error) {
+        if (!cancelled) onError(error instanceof Error ? error.message : "Could not check song status.");
+      }
+    };
+    poll();
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [jobId, onComplete, onError]);
 
   return (
     <div className="bg-burgundy rounded-3xl p-8 sm:p-12 text-white max-w-2xl mx-auto text-center space-y-8 shadow-2xl border border-white/20 animate-in fade-in duration-300">

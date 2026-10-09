@@ -139,18 +139,37 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
             aria-label="Studio navigation"
             className="absolute inset-x-3 top-[calc(100%+0.5rem)] z-50 rounded-2xl border border-[#efe5f7] bg-white p-2 shadow-xl md:hidden"
           >
-            {DASHBOARD_NAV_ITEMS.map(({ label, href, icon: Icon }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMobileNavOpen(false)}
-                aria-current={pathname === href ? "page" : undefined}
-                className={`flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition hover:bg-[#f5eefb] hover:text-[#1b1b1f] ${pathname === href ? "bg-[#f2edfb] text-[#35135f]" : "text-neutral-700"}`}
-              >
-                <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                {label}
-              </Link>
-            ))}
+            {DASHBOARD_NAV_ITEMS.map(({ label, href, icon: Icon, available }) => {
+              const isActive = pathname === href || (href !== "/dashboard" && pathname.startsWith(href));
+              const contents = (
+                <>
+                  <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="min-w-0 flex-1 truncate">{label}</span>
+                  {label === "Music Box" && <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${isActive ? "bg-white/15 text-white" : "bg-emerald-100 text-emerald-800"}`}>Live</span>}
+                    {!available && <span className="shrink-0 whitespace-nowrap rounded-full bg-neutral-100 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wide text-neutral-500">Coming soon</span>}
+                </>
+              );
+
+              return available ? (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setMobileNavOpen(false)}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition ${isActive ? "rounded-full bg-berry text-white hover:bg-berry-hover hover:text-white" : label === "Music Box" ? "text-[#603ab7] hover:bg-[#f5eefb]" : "text-neutral-700 hover:bg-[#f5eefb] hover:text-[#1b1b1f]"}`}
+                >
+                  <>
+                    <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span className="min-w-0 flex-1 truncate">{label}</span>
+                    {label === "Music Box" && <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${isActive ? "bg-white/15 text-white" : "bg-emerald-100 text-emerald-800"}`}>Live</span>}
+                  </>
+                </Link>
+              ) : (
+                <div key={href} aria-disabled="true" className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-400">
+                  {contents}
+                </div>
+              );
+            })}
             <Link
               href="/"
               onClick={() => setMobileNavOpen(false)}

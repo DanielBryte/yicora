@@ -17,10 +17,42 @@ export function MarketingFooter() {
           <div className="space-y-4">
             <h2 className="text-sm font-semibold tracking-tight text-[#c89aff]">Products</h2>
             <ul className="space-y-3 text-sm text-white/70">
-              <li><Link href="/video" className="transition-colors hover:text-white">Video dubbing</Link></li>
-              <li><Link href="/voice" className="transition-colors hover:text-white">Text to speech</Link></li>
-              <li><Link href="/voice" className="transition-colors hover:text-white">AI voice-over</Link></li>
-              <li><Link href="/music" className="transition-colors hover:text-white">AI Music Box</Link></li>
+              <li>
+                <Link href="/music" className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-violet-200">
+                  AI Music Box
+                  <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">Live</span>
+                </Link>
+              </li>
+              <li>
+                <span className="inline-flex items-center gap-2">
+                  AI Face Changer
+                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
+                </span>
+              </li>
+              <li>
+                <span className="inline-flex items-center gap-2">
+                  AI UGC Studio
+                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
+                </span>
+              </li>
+              <li>
+                <span className="inline-flex items-center gap-2">
+                  Video dubbing
+                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
+                </span>
+              </li>
+              <li>
+                <span className="inline-flex items-center gap-2">
+                  Text to speech
+                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
+                </span>
+              </li>
+              <li>
+                <span className="inline-flex items-center gap-2">
+                  AI voice-over
+                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
+                </span>
+              </li>
             </ul>
           </div>
 

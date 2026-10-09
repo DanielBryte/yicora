@@ -13,36 +13,20 @@ export interface ProjectItem {
 
 const SAMPLE_PROJECTS: ProjectItem[] = [
   {
-    id: "proj_vid_01",
-    title: "Nollywood Documentary Yoruba Dub",
-    type: "video",
+    id: "proj_mus_01",
+    title: "Afrobeats Summer Anthem",
+    type: "music",
     status: "completed",
-    thumbnailUrl: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&auto=format&fit=crop&q=80",
+    thumbnailUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&auto=format&fit=crop&q=80",
     createdAt: "10 mins ago",
   },
   {
     id: "proj_mus_02",
-    title: "Afrobeats Summer Anthem (Amapiano DNA)",
+    title: "Amapiano Brand Theme",
     type: "music",
     status: "completed",
-    thumbnailUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&auto=format&fit=crop&q=80",
+    thumbnailUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=300&auto=format&fit=crop&q=80",
     createdAt: "2 hours ago",
-  },
-  {
-    id: "proj_voi_03",
-    title: "Fintech App Onboarding Script (Igbo)",
-    type: "voice",
-    status: "processing",
-    thumbnailUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=80",
-    createdAt: "5 hours ago",
-  },
-  {
-    id: "proj_vid_04",
-    title: "Tech Review Hausa Localization",
-    type: "video",
-    status: "queued",
-    thumbnailUrl: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=300&auto=format&fit=crop&q=80",
-    createdAt: "1 day ago",
   },
 ];
 
