@@ -8,6 +8,8 @@ export interface GenerateMusicDescribeInput {
   duration: string;
   energy: number;
   tempo: number;
+  referenceFileId?: string;
+  voiceFileId?: string;
 }
 
 export interface GenerateMusicLyricsInput {
@@ -18,6 +20,8 @@ export interface GenerateMusicLyricsInput {
   vocalType: string;
   language: string;
   duration: string;
+  referenceFileId?: string;
+  voiceFileId?: string;
 }
 
 export interface MusicDNAAnalysis {
@@ -36,6 +40,8 @@ export interface GenerateMusicDNAInput {
   modifiedTempo: number;
   modifiedMood: string;
   modifiedInstrumentation: string[];
+  referenceFileId?: string;
+  voiceFileId?: string;
 }
 
 export type GenerateMusicInput =

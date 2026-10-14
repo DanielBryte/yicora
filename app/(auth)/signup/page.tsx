@@ -24,6 +24,8 @@ export default function SignupPage() {
 
     const supabase = createClient();
     const siteUrl = getSiteUrl();
+    const requestedNext = new URLSearchParams(window.location.search).get("next");
+    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
     const { error: authError } = await supabase.auth.signUp({
       email,
       password,
@@ -31,24 +33,26 @@ export default function SignupPage() {
         data: {
           full_name: fullName,
         },
-        emailRedirectTo: `${siteUrl}/auth/callback?next=/dashboard`,
+        emailRedirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}`,
       },
     });
 
     if (authError) {
       // Fallback for MVP testing: route straight to dashboard
-      router.push("/dashboard");
+      router.push(next);
     } else {
-      router.push("/dashboard");
+      router.push(next);
     }
   };
 
   const handleGoogleSignup = async () => {
     const supabase = createClient();
     const siteUrl = getSiteUrl();
+    const requestedNext = new URLSearchParams(window.location.search).get("next");
+    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${siteUrl}/auth/callback?next=/dashboard` },
+      options: { redirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}` },
     });
   };
 

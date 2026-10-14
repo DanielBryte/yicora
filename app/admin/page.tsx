@@ -9,6 +9,7 @@ import { ProcessingQueue } from "@/components/admin/processing-queue";
 import { VoiceModelsStatus } from "@/components/admin/voice-models-status";
 import { ApiLogsView } from "@/components/admin/api-logs-view";
 import { SystemSettings } from "@/components/admin/system-settings";
+import { RevenueOverview } from "@/components/admin/revenue-overview";
 
 export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -55,6 +56,8 @@ export default function AdminDashboardPage() {
               <UserManagement />
             </div>
           )}
+
+          {activeTab === "revenue" && <div className="animate-in fade-in duration-200"><RevenueOverview /></div>}
 
           {activeTab === "queue" && (
             <div className="animate-in fade-in duration-200">

@@ -6,7 +6,6 @@ import { VoiceCard } from "./voice-card";
 import { AFRICAN_VOICE_PRESETS } from "@/lib/providers/voice/mock-provider";
 import { VoiceOption } from "@/lib/providers/voice/types";
 import { Mic, Sparkles, Sliders } from "lucide-react";
-import { getVoiceProvider } from "@/lib/providers/voice";
 
 export function TTSForm() {
   const router = useRouter();
@@ -17,26 +16,24 @@ export function TTSForm() {
   const [tone, setTone] = useState("Warm & Expressive");
   const [speed, setSpeed] = useState(1.0);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
-      const provider = getVoiceProvider();
-      const result = await provider.generateSpeech({
-        inputText,
-        language: selectedVoice.language,
-        voiceId: selectedVoice.id,
-        voiceName: selectedVoice.name,
-        gender: selectedVoice.gender,
-        tone,
-        speed,
+      const response = await fetch("/api/generate/voice", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inputText, language: selectedVoice.language, voiceId: selectedVoice.id,
+          voiceName: selectedVoice.name, gender: selectedVoice.gender, tone, speed }),
       });
-
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not synthesize speech.");
       router.push(`/voice/${result.jobId}`);
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Could not synthesize speech.");
       setLoading(false);
     }
   };
@@ -85,6 +82,7 @@ export function TTSForm() {
             />
           ))}
         </div>
+        {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
       </div>
 
       {/* Controls: Tone & Speed */}

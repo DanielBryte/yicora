@@ -22,6 +22,8 @@ export default function LoginPage() {
     setError(null);
 
     const supabase = createClient();
+    const requestedNext = new URLSearchParams(window.location.search).get("next");
+    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
     const { error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -30,22 +32,24 @@ export default function LoginPage() {
     if (authError) {
       // For MVP testing fallback: redirect to dashboard if using demo credentials
       if (email.includes("demo") || process.env.NODE_ENV === "development") {
-        router.push("/dashboard");
+        router.push(next);
         return;
       }
       setError(authError.message);
       setLoading(false);
     } else {
-      router.push("/dashboard");
+      router.push(next);
     }
   };
 
   const handleGoogleLogin = async () => {
     const supabase = createClient();
     const siteUrl = getSiteUrl();
+    const requestedNext = new URLSearchParams(window.location.search).get("next");
+    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${siteUrl}/auth/callback?next=/dashboard` },
+      options: { redirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}` },
     });
   };
 

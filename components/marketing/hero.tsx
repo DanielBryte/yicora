@@ -58,7 +58,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white"
+          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[1.06] tracking-[-0.045em] text-white sm:leading-[1.08]"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -67,7 +67,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mx-auto mt-4 w-full max-w-2xl text-sm font-normal leading-relaxed text-white/75 sm:text-base lg:text-lg"
+          className="mx-auto mt-6 w-full max-w-2xl text-sm font-normal leading-relaxed text-white/75 sm:mt-7 sm:text-base lg:text-lg"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
@@ -76,7 +76,7 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-7 flex w-full max-w-lg flex-row items-center justify-center gap-3 sm:mt-8"
+          className="mt-8 flex w-full max-w-lg flex-row items-center justify-center gap-3 sm:mt-9"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.26, ease: [0.22, 1, 0.36, 1] }}

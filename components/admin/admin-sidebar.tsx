@@ -12,6 +12,7 @@ import {
   LogOut,
   ArrowLeft,
   Lock,
+  BadgeDollarSign,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
@@ -23,6 +24,7 @@ interface AdminSidebarProps {
 export const ADMIN_NAV_ITEMS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "users", label: "Users & Credits", icon: Users },
+  { id: "revenue", label: "Credit Sales", icon: BadgeDollarSign },
   { id: "queue", label: "Task Queue", icon: Cpu },
   { id: "voices", label: "Voice Fleet", icon: Radio },
   { id: "logs", label: "API Logs", icon: Terminal },

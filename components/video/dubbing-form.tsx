@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Upload, Video, Sparkles, Link as LinkIcon } from "lucide-react";
-import { getVideoProvider } from "@/lib/providers/video";
 
 const AFRICAN_LANGUAGES = [
   { code: "yo", name: "Yoruba", flag: "🇳🇬" },
@@ -23,27 +22,28 @@ export function VideoDubbingForm() {
   const [subtitles, setSubtitles] = useState(true);
   const [translatedSubs, setTranslatedSubs] = useState(true);
   const [dubbedAudio, setDubbedAudio] = useState(true);
+  const [durationMinutes, setDurationMinutes] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
-      const provider = getVideoProvider();
-      const result = await provider.dubVideo({
-        sourceVideoUrl,
-        sourceLanguage: sourceLang,
-        targetLanguage: targetLang,
-        subtitlesEnabled: subtitles,
-        translatedSubtitlesEnabled: translatedSubs,
-        dubbedAudioEnabled: dubbedAudio,
+      const response = await fetch("/api/generate/video", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sourceVideoUrl, sourceLanguage: sourceLang, targetLanguage: targetLang,
+          subtitlesEnabled: subtitles, translatedSubtitlesEnabled: translatedSubs, dubbedAudioEnabled: dubbedAudio, durationMinutes }),
       });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Could not start video dubbing.");
 
       // Route to project detail page
       router.push(`/video/${result.jobId}`);
     } catch (err) {
-      console.error(err);
+      setError(err instanceof Error ? err.message : "Could not start video dubbing.");
       setLoading(false);
     }
   };
@@ -84,6 +84,12 @@ export function VideoDubbingForm() {
             className="w-full pl-11 pr-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berry/30 focus:border-berry text-darktext"
           />
         </div>
+      </div>
+
+      {/* Language Selectors */}
+      <div className="space-y-1.5">
+        <label htmlFor="video-duration" className="text-xs font-semibold uppercase tracking-wider text-neutral-600">Video length in minutes</label>
+        <input id="video-duration" type="number" min={1} max={60} step={1} value={durationMinutes} onChange={(e) => setDurationMinutes(Math.max(1, Math.min(60, Number(e.target.value) || 1)))} className="w-full rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-darktext" />
       </div>
 
       {/* Language Selectors */}
@@ -163,7 +169,7 @@ export function VideoDubbingForm() {
 
       <div className="pt-4 flex items-center justify-between">
         <div className="text-xs text-neutral-500 font-medium">
-          Deducts <span className="font-bold text-berry">5 credits</span> per minute
+          Uses <span className="font-bold text-berry">{durationMinutes * 5} credits</span> for this video
         </div>
 
         <button
@@ -175,6 +181,7 @@ export function VideoDubbingForm() {
           <span>{loading ? "Initializing Dub..." : "Start Video Dubbing"}</span>
         </button>
       </div>
+      {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
     </form>
   );
 }

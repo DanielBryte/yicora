@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Clapperboard, CreditCard, FolderKanban, Mic, Music, Search, Settings, Sparkles } from "lucide-react";
+import { ArrowRight, Clapperboard, CreditCard, FolderKanban, Mic, Music, Search, Settings, Shirt, Sparkles, UserRound } from "lucide-react";
 
 const DESTINATIONS = [
   { name: "Music Box", description: "Generate original music", href: "/music", keywords: "music song audio compose generate", icon: Music, group: "Create", available: true },
   { name: "Video Dubbing", description: "Translate and dub video content", href: "/video", keywords: "video dubbing subtitles localization translate", icon: Clapperboard, group: "Create", available: false },
   { name: "Voice Studio", description: "Create speech from a script", href: "/voice", keywords: "voice audio speech narration text to speech tts", icon: Mic, group: "Create", available: false },
-  { name: "AI Face Changer", description: "Transform faces in your creative content", href: "#coming-soon", keywords: "face changer face swap photo image", icon: Sparkles, group: "Create", available: false },
+  { name: "Virtual Try-On", description: "Try outfits live with a garment photo", href: "/dashboard/virtual-try-on", keywords: "virtual try on clothes fashion outfit garment live camera", icon: Shirt, group: "Create", available: true },
+  { name: "AI Face Changer", description: "Transform your look live with a reference image", href: "/dashboard/face-changer", keywords: "face changer face swap character live camera", icon: UserRound, group: "Create", available: true },
   { name: "AI UGC Studio", description: "Create creator-style brand videos", href: "#coming-soon", keywords: "ugc creator video user generated content", icon: Sparkles, group: "Create", available: false },
   { name: "Projects", description: "Browse and manage your creations", href: "/projects", keywords: "projects library assets files generations", icon: FolderKanban, group: "Workspace", available: true },
   { name: "Billing & Credits", description: "View your balance and transactions", href: "/billing", keywords: "billing credits payments plan usage", icon: CreditCard, group: "Workspace", available: true },

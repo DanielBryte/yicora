@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/shared/logo";
@@ -11,22 +12,26 @@ import {
   FolderKanban,
   CreditCard,
   Settings,
-  LogOut,
   Plus,
   Sparkles,
   Coins,
   ArrowUpRight,
   Clapperboard,
   FolderOpen,
+  Shirt,
+  UserRound,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 export const DASHBOARD_NAV_ITEMS = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard, available: true },
+  { label: "Virtual Try-On", href: "/dashboard/virtual-try-on", icon: Shirt, available: true },
+  { label: "AI Face Changer", href: "/dashboard/face-changer", icon: UserRound, available: true },
   { label: "Music Box", href: "/music", icon: Music, available: true },
   { label: "Video Dubbing", href: "/video", icon: Clapperboard, available: false },
   { label: "Voice Studio", href: "/voice", icon: Mic, available: false },
-  { label: "AI Face Changer", href: "#coming-soon", icon: Sparkles, available: false },
   { label: "AI UGC Studio", href: "#coming-soon", icon: Sparkles, available: false },
 ];
 
@@ -37,16 +42,17 @@ const SECONDARY_NAV_ITEMS = [
 ];
 
 const CREATE_TOOLS = [
-  { label: "Music Box", href: "/music", icon: Music, color: "bg-[#f2edfb] text-[#5d3ab7]", available: true },
-  { label: "Video Dubbing", href: "/video", icon: Clapperboard, color: "bg-[#f2edfb] text-[#5d3ab7]", available: false },
-  { label: "Voice Studio", href: "/voice", icon: Mic, color: "bg-[#f2edfb] text-[#5d3ab7]", available: false },
-  { label: "AI Face Changer", href: "#coming-soon", icon: Sparkles, color: "bg-[#f2edfb] text-[#5d3ab7]", available: false },
-  { label: "AI UGC Studio", href: "#coming-soon", icon: Sparkles, color: "bg-[#f2edfb] text-[#5d3ab7]", available: false },
-  { label: "Billing & Credits", href: "/billing", icon: Coins, color: "bg-[#f2edfb] text-[#5d3ab7]", available: true },
-  { label: "Projects", href: "/projects", icon: FolderOpen, color: "bg-[#f2edfb] text-[#5d3ab7]", available: true },
+  { label: "Virtual Try-On", href: "/dashboard/virtual-try-on", icon: Shirt, color: "bg-fuchsia-100 text-fuchsia-700", available: true },
+  { label: "AI Face Changer", href: "/dashboard/face-changer", icon: UserRound, color: "bg-cyan-100 text-cyan-700", available: true },
+  { label: "Music Box", href: "/music", icon: Music, color: "bg-amber-100 text-amber-700", available: true },
+  { label: "Video Dubbing", href: "/video", icon: Clapperboard, color: "bg-rose-100 text-rose-700", available: false },
+  { label: "Voice Studio", href: "/voice", icon: Mic, color: "bg-sky-100 text-sky-700", available: false },
+  { label: "AI UGC Studio", href: "#coming-soon", icon: Sparkles, color: "bg-violet-100 text-violet-700", available: false },
+  { label: "Billing & Credits", href: "/billing", icon: Coins, color: "bg-lime-100 text-lime-700", available: true },
+  { label: "Projects", href: "/projects", icon: FolderOpen, color: "bg-emerald-100 text-emerald-700", available: true },
 ];
 
-export function Sidebar() {
+export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
   const pathname = usePathname();
   const [createOpen, setCreateOpen] = useState(false);
   const createMenuRef = useRef<HTMLDivElement>(null);
@@ -77,10 +83,27 @@ export function Sidebar() {
   }, [createOpen]);
 
   return (
-    <aside className="fixed left-0 top-0 z-30 hidden h-screen w-[252px] shrink-0 flex-col justify-between overflow-y-auto border-r border-[#e8e7ed] bg-white p-4 md:flex">
-        <div className="space-y-6 pb-6">
-        <div className="flex items-center px-2">
-          <Logo />
+    <aside className={cn(
+      "fixed left-0 top-0 z-30 hidden h-screen shrink-0 flex-col justify-between overflow-y-auto border-r border-[#e8e7ed] bg-white transition-[width,padding] duration-300 ease-out md:flex",
+      collapsed ? "w-[76px] p-2" : "w-[252px] p-4",
+    )}>
+        <div className={cn("pb-6", collapsed ? "space-y-4" : "space-y-6")}>
+        <div className={cn("flex items-center", collapsed ? "min-h-10 flex-col justify-center gap-2 pt-4" : "min-h-16 justify-between px-2")}>
+          {collapsed ? (
+            <Link href="/dashboard" aria-label="YiCORA dashboard" title="YiCORA" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-transparent">
+              <Image src="/yicora-mark.svg" alt="YiCORA" width={24} height={28} className="h-7 w-6 shrink-0 object-contain" />
+            </Link>
+          ) : <Logo />}
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-pressed={collapsed}
+            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            className={cn("flex shrink-0 items-center justify-center rounded-xl text-neutral-500 transition hover:bg-[#f2edfb] hover:text-[#5d3ab7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40", collapsed ? "h-7 w-7" : "h-9 w-9")}
+          >
+            {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+          </button>
         </div>
 
         <div ref={createMenuRef} className="relative">
@@ -90,16 +113,17 @@ export function Sidebar() {
             onClick={() => setCreateOpen((open) => !open)}
             aria-expanded={createOpen}
             aria-controls="create-tools-menu"
-            className="flex min-h-11 w-full items-center gap-2.5 rounded-[18px] border border-transparent bg-transparent p-1.5 text-left text-sm font-semibold text-[#7130dc] shadow-none transition hover:text-[#5721b5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40"
+            title={collapsed ? "Create" : undefined}
+            className={cn("flex min-h-11 w-full items-center rounded-[18px] border border-transparent bg-transparent p-1.5 text-left text-sm font-semibold text-[#7130dc] shadow-none transition hover:text-[#5721b5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40", collapsed ? "justify-center" : "gap-2.5")}
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-berry text-white">
               <Plus className="h-4 w-4" strokeWidth={2.5} />
             </span>
-            <span className="flex-1">Create</span>
+            <span className={cn("flex-1", collapsed && "sr-only")}>Create</span>
           </button>
 
           {createOpen && (
-            <div id="create-tools-menu" className="absolute left-0 top-[calc(100%+0.5rem)] z-50 w-full min-w-[220px] rounded-xl border border-[#e8e7ed] bg-white p-1.5 shadow-[0_12px_28px_rgba(32,28,39,0.12)]">
+            <div id="create-tools-menu" className={cn("z-50 w-[240px] rounded-xl border border-[#e8e7ed] bg-white p-1.5 shadow-[0_12px_28px_rgba(32,28,39,0.12)]", collapsed ? "fixed left-[84px] top-20" : "absolute left-0 top-[calc(100%+0.5rem) w-full min-w-[220px]")}>
               <nav aria-label="Create a project" className="space-y-0.5">
                 {CREATE_TOOLS.map(({ label, href, icon: Icon, color, available }) => {
                   const row = (
@@ -108,9 +132,7 @@ export function Sidebar() {
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </span>
                       <span className="min-w-0 flex-1 truncate">{label}</span>
-                      {label === "Music Box" ? (
-                        <span className="ml-auto rounded-full bg-emerald-100 px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide text-emerald-800">Live</span>
-                      ) : available ? (
+                      {available ? (
                         <ArrowUpRight className="ml-auto h-3.5 w-3.5 text-neutral-400" />
                       ) : (
                         <span className="ml-auto shrink-0 whitespace-nowrap rounded-full bg-neutral-100 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wide text-neutral-500">Coming soon</span>
@@ -133,8 +155,8 @@ export function Sidebar() {
           )}
         </div>
 
-        <div className="space-y-2">
-          <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Tools</p>
+        <div className={cn("space-y-2", collapsed && "space-y-3")}>
+          {!collapsed && <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Tools</p>}
           <nav className="space-y-1.5">
             {DASHBOARD_NAV_ITEMS.filter((item) => item.available).map((item) => {
               const Icon = item.icon;
@@ -145,27 +167,29 @@ export function Sidebar() {
                   key={item.href}
                   aria-current={isActive ? "page" : undefined}
                   href={item.href}
+                  title={collapsed ? item.label : undefined}
                   className={cn(
                     "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors duration-200",
+                    collapsed && "justify-center px-0",
+                    item.label === "Overview" && "rounded-full",
                     item.label === "Music Box" && !isActive && "bg-[#fbf8ff] text-[#603ab7]",
                     isActive ? "rounded-full bg-berry text-white shadow-sm hover:bg-berry-hover hover:text-white" : item.label === "Music Box" ? "hover:bg-[#f3ebff]" : "text-neutral-600 hover:bg-white hover:text-[#1b1b1f]"
                   )}
                 >
                   <Icon className={cn("h-4 w-4", isActive ? "text-white" : "text-neutral-500")} />
-                  <span>{item.label}</span>
-                  {item.label === "Music Box" && <span className={cn("ml-auto rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide", isActive ? "bg-white/15 text-white" : "bg-emerald-100 text-emerald-800")}>Live</span>}
+                  <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="space-y-1.5 border-t border-[#eeeaf2] pt-3">
-            <p className="px-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-400">Coming soon</p>
+          <div className={cn("space-y-1.5 border-t border-[#eeeaf2] pt-3", collapsed && "border-0 pt-0")}>
+            {!collapsed && <p className="px-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-400">Coming soon</p>}
             <nav aria-label="Coming soon tools" className="space-y-1">
               {DASHBOARD_NAV_ITEMS.filter((item) => !item.available).map(({ label, icon: Icon }) => (
-                <div key={label} aria-disabled="true" className="flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium text-neutral-400">
+                <div key={label} aria-disabled="true" title={collapsed ? label : undefined} className={cn("flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium text-neutral-400", collapsed && "justify-center px-0")}>
                   <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden="true" />
-                  <span>{label}</span>
+                  <span className={collapsed ? "sr-only" : undefined}>{label}</span>
                 </div>
               ))}
             </nav>
@@ -173,9 +197,9 @@ export function Sidebar() {
         </div>
       </div>
 
-      <div className="space-y-4 border-t border-[#e8e7ed] pt-4">
+      <div className={cn("space-y-4 border-t border-[#e8e7ed] pt-4", collapsed && "space-y-3")}>
         <div className="space-y-2">
-          <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Workspace</p>
+          {!collapsed && <p className="px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500">Workspace</p>}
           <div className="space-y-1.5">
             {SECONDARY_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
@@ -185,34 +209,21 @@ export function Sidebar() {
                   key={item.label}
                   aria-current={isActive ? "page" : undefined}
                   href={item.href}
+                  title={collapsed ? item.label : undefined}
                   className={cn(
                     "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition hover:bg-white",
+                    collapsed && "justify-center px-0",
                     isActive ? "rounded-full bg-berry text-white shadow-sm hover:bg-berry-hover hover:text-white" : "text-neutral-600 hover:text-[#1b1b1f]"
                   )}
                 >
                   <Icon className={cn("h-4 w-4", isActive ? "text-white" : "text-neutral-500")} />
-                  <span>{item.label}</span>
+                  <span className={collapsed ? "sr-only" : undefined}>{item.label}</span>
                 </Link>
               );
             })}
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-3 pt-2">
-          <button type="button" aria-label="Notifications" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9dff3] bg-white text-neutral-600 shadow-sm transition hover:text-[#7c4bd6]">
-            <Sparkles className="h-4 w-4" />
-          </button>
-          <button type="button" aria-label="Settings" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9dff3] bg-white text-neutral-600 shadow-sm transition hover:text-[#7c4bd6]">
-            <Settings className="h-4 w-4" />
-          </button>
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-2xl px-3 py-2 text-xs font-medium text-neutral-600 transition hover:bg-red-50 hover:text-red-600"
-          >
-            <LogOut className="h-4 w-4" />
-            <span>Exit</span>
-          </Link>
-        </div>
       </div>
     </aside>
   );

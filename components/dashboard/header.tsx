@@ -9,9 +9,10 @@ import { DASHBOARD_NAV_ITEMS } from "@/components/dashboard/sidebar";
 interface HeaderProps {
   userName?: string;
   credits?: number;
+  sidebarCollapsed?: boolean;
 }
 
-export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderProps) {
+export function DashboardHeader({ userName = "Creator", credits = 50, sidebarCollapsed = false }: HeaderProps) {
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -29,7 +30,7 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-[#e8e7ed] bg-white md:left-[252px] md:right-0 md:w-[calc(100%-252px)]">
+    <header className={`fixed inset-x-0 top-0 z-40 border-b border-[#e8e7ed] bg-white transition-[left,width] duration-300 ease-out md:right-0 ${sidebarCollapsed ? "md:left-[76px] md:w-[calc(100%-76px)]" : "md:left-[252px] md:w-[calc(100%-252px)]"}`}>
       <div className="relative mx-auto flex min-h-[64px] w-full max-w-[1600px] items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
           <button
@@ -51,11 +52,11 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <Link
             href="/billing"
-            className="hidden items-center gap-1.5 rounded-full border border-[#ddc9ff] bg-[#f5eeff] px-2.5 py-2 text-[#603ab7] shadow-sm transition hover:border-[#c9a9ff] hover:bg-[#efe5ff] sm:flex sm:gap-2 sm:px-4"
+            className="hidden items-center gap-1.5 rounded-full bg-[#7130dc] px-2.5 py-2 text-white shadow-sm transition hover:bg-[#5f26bd] sm:flex sm:gap-2 sm:px-4"
           >
-            <Coins className="h-4 w-4 text-[#7c4bd6]" />
+            <Coins className="h-4 w-4 text-white" />
             <span className="text-[11px] font-bold sm:text-xs">{credits} Credits</span>
-            <Sparkles className="hidden h-3 w-3 text-[#7c4bd6] sm:block" />
+            <Sparkles className="hidden h-3 w-3 text-white sm:block" />
           </Link>
 
           <button type="button" aria-label="Notifications" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e9dff3] bg-white text-neutral-600 shadow-sm transition hover:text-[#7c4bd6]">
@@ -70,7 +71,7 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
               aria-expanded={profileOpen}
               aria-haspopup="menu"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[linear-gradient(135deg,#8d55ef_0%,#7c4bd6_100%)] text-sm font-bold text-white shadow-sm">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#7c4bd6] text-sm font-bold text-white shadow-sm">
                 {userName.charAt(0).toUpperCase()}
               </span>
               <span className="hidden text-left sm:block">
@@ -83,7 +84,7 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
             {profileOpen && (
               <div className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-64 overflow-hidden rounded-3xl border border-[#efe5f7] bg-white p-2 shadow-2xl shadow-[#d5c6eb]/40">
                 <div className="flex items-center gap-3 rounded-2xl bg-[#f7f0ff] px-3 py-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#8d55ef_0%,#7c4bd6_100%)] text-sm font-bold text-white shadow-sm">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#7c4bd6] text-sm font-bold text-white shadow-sm">
                     {userName.charAt(0).toUpperCase()}
                   </span>
                   <div className="min-w-0">
@@ -145,7 +146,6 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
                 <>
                   <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span className="min-w-0 flex-1 truncate">{label}</span>
-                  {label === "Music Box" && <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${isActive ? "bg-white/15 text-white" : "bg-emerald-100 text-emerald-800"}`}>Live</span>}
                     {!available && <span className="shrink-0 whitespace-nowrap rounded-full bg-neutral-100 px-1.5 py-0.5 text-[8px] font-semibold uppercase tracking-wide text-neutral-500">Coming soon</span>}
                 </>
               );
@@ -156,12 +156,11 @@ export function DashboardHeader({ userName = "Creator", credits = 50 }: HeaderPr
                   href={href}
                   onClick={() => setMobileNavOpen(false)}
                   aria-current={isActive ? "page" : undefined}
-                  className={`flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition ${isActive ? "rounded-full bg-berry text-white hover:bg-berry-hover hover:text-white" : label === "Music Box" ? "text-[#603ab7] hover:bg-[#f5eefb]" : "text-neutral-700 hover:bg-[#f5eefb] hover:text-[#1b1b1f]"}`}
+                  className={`flex min-h-11 items-center gap-3 ${label === "Overview" || isActive ? "rounded-full" : "rounded-2xl"} px-3 py-2.5 text-sm font-medium transition ${isActive ? "bg-berry text-white hover:bg-berry-hover hover:text-white" : label === "Music Box" ? "text-[#603ab7] hover:bg-[#f5eefb]" : "text-neutral-700 hover:bg-[#f5eefb] hover:text-[#1b1b1f]"}`}
                 >
                   <>
                     <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span className="min-w-0 flex-1 truncate">{label}</span>
-                    {label === "Music Box" && <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide ${isActive ? "bg-white/15 text-white" : "bg-emerald-100 text-emerald-800"}`}>Live</span>}
                   </>
                 </Link>
               ) : (
