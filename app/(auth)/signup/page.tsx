@@ -16,44 +16,55 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [confirmationSent, setConfirmationSent] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const supabase = createClient();
-    const siteUrl = getSiteUrl();
-    const requestedNext = new URLSearchParams(window.location.search).get("next");
-    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
-    const { error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
+    try {
+      const supabase = createClient();
+      const siteUrl = getSiteUrl();
+      const requestedNext = new URLSearchParams(window.location.search).get("next");
+      const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: { full_name: fullName.trim() },
+          emailRedirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}`,
         },
-        emailRedirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}`,
-      },
-    });
-
-    if (authError) {
-      // Fallback for MVP testing: route straight to dashboard
-      router.push(next);
-    } else {
-      router.push(next);
+      });
+      if (authError) throw authError;
+      if (data.session) {
+        router.replace(next);
+        router.refresh();
+      } else {
+        setConfirmationSent(true);
+        setLoading(false);
+      }
+    } catch (authError) {
+      setError(authError instanceof Error ? authError.message : "We couldn’t create your account. Please try again.");
+      setLoading(false);
     }
   };
 
   const handleGoogleSignup = async () => {
-    const supabase = createClient();
-    const siteUrl = getSiteUrl();
-    const requestedNext = new URLSearchParams(window.location.search).get("next");
-    const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: { redirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}` },
-    });
+    setError(null);
+    try {
+      const supabase = createClient();
+      const siteUrl = getSiteUrl();
+      const requestedNext = new URLSearchParams(window.location.search).get("next");
+      const next = requestedNext?.startsWith("/") && !requestedNext.startsWith("//") ? requestedNext : "/dashboard";
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${siteUrl}/auth/callback?next=${encodeURIComponent(next)}` },
+      });
+      if (authError) throw authError;
+    } catch (authError) {
+      setError(authError instanceof Error ? authError.message : "Google sign-up isn’t available right now.");
+    }
   };
 
   return (
@@ -70,6 +81,12 @@ export default function SignupPage() {
         {error && (
           <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium">
             {error}
+          </div>
+        )}
+
+        {confirmationSent && (
+          <div role="status" className="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-800">
+            Check your email for a confirmation link to finish creating your account.
           </div>
         )}
 
@@ -141,7 +158,7 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || confirmationSent}
             className="w-full py-3.5 rounded-xl bg-berry hover:bg-berry-hover text-white font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 mt-6 active:scale-95 disabled:opacity-50"
           >
             <span>{loading ? "Creating Account..." : "Create Account"}</span>

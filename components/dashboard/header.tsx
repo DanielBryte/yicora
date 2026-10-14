@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, Coins, Menu, X, ChevronDown, UserRound, CreditCard, Settings, LogOut, Bell } from "lucide-react";
+import { Sparkles, Coins, Menu, X, ChevronDown, UserRound, CreditCard, Settings, LogOut, Bell, Rocket } from "lucide-react";
 import { DASHBOARD_NAV_ITEMS } from "@/components/dashboard/sidebar";
 
 interface HeaderProps {
@@ -160,7 +160,7 @@ export function DashboardHeader({ userName = "Creator", credits = 50, sidebarCol
                 >
                   <>
                     <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span className="min-w-0 flex-1 truncate">{label}</span>
+                    <span className="min-w-0 flex-1 truncate">{label}</span>
                   </>
                 </Link>
               ) : (
@@ -169,6 +169,13 @@ export function DashboardHeader({ userName = "Creator", credits = 50, sidebarCol
                 </div>
               );
             })}
+            <Link
+              href="/billing"
+              onClick={() => setMobileNavOpen(false)}
+              className="my-2 flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#7130dc] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#5f26bd]"
+            >
+              <Rocket className="h-4 w-4" /> Upgrade plan
+            </Link>
             <Link
               href="/"
               onClick={() => setMobileNavOpen(false)}

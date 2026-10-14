@@ -1,6 +1,4 @@
 import { QuickActions } from "@/components/dashboard/quick-actions";
-import { StatsOverview } from "@/components/dashboard/stats-overview";
-import { RecentProjects } from "@/components/dashboard/recent-projects";
 import { ToolSearch } from "@/components/dashboard/tool-search";
 
 export default function DashboardPage() {
@@ -15,8 +13,6 @@ export default function DashboardPage() {
         <ToolSearch />
       </div>
       <QuickActions />
-      <StatsOverview />
-      <RecentProjects />
     </div>
   );
 }

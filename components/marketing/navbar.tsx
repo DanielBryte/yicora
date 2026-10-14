@@ -13,6 +13,7 @@ import {
   Music2,
   Video,
   X,
+  WandSparkles,
 } from "lucide-react";
 
 const PRODUCT_COLUMNS = [
@@ -229,7 +230,8 @@ export function MarketingNavbar() {
             <Link href="/login" className="rounded-full px-2 py-1.5 text-[13px] font-medium text-white/90 transition-colors hover:text-white sm:px-3 sm:text-sm">
               Log In
             </Link>
-            <Link href="/signup" className="flex items-center justify-center rounded-full bg-berry px-3 py-2 text-[13px] font-semibold text-white shadow-sm transition-all hover:bg-berry-hover hover:shadow active:scale-95 sm:px-6 sm:py-2.5 sm:text-sm">
+            <Link href="/signup" className="flex items-center justify-center gap-2 rounded-full bg-berry px-3 py-2 text-[13px] font-semibold text-white shadow-sm transition-all hover:bg-berry-hover hover:shadow active:scale-95 sm:px-6 sm:py-2.5 sm:text-sm">
+              <WandSparkles className="h-4 w-4" aria-hidden="true" />
               Try It Out
             </Link>
           </div>
@@ -273,7 +275,8 @@ export function MarketingNavbar() {
               <Link href="/login" onClick={() => setMobileOpen(false)} className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 px-4 text-sm font-semibold text-white/85 transition hover:bg-white/[0.08]">
                 Log In
               </Link>
-              <Link href="/signup" onClick={() => setMobileOpen(false)} className="inline-flex min-h-11 items-center justify-center rounded-full bg-berry px-4 text-sm font-semibold text-white transition hover:bg-berry-hover">
+              <Link href="/signup" onClick={() => setMobileOpen(false)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-berry px-4 text-sm font-semibold text-white transition hover:bg-berry-hover">
+                <WandSparkles className="h-4 w-4" aria-hidden="true" />
                 Try It Out
               </Link>
             </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/shared/logo";
@@ -22,6 +23,7 @@ import {
   UserRound,
   PanelLeftClose,
   PanelLeftOpen,
+  Rocket,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
@@ -55,8 +57,14 @@ const CREATE_TOOLS = [
 export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
   const pathname = usePathname();
   const [createOpen, setCreateOpen] = useState(false);
+  const [navTooltip, setNavTooltip] = useState<{ label: string; left: number; top: number } | null>(null);
   const createMenuRef = useRef<HTMLDivElement>(null);
   const createButtonRef = useRef<HTMLButtonElement>(null);
+
+  function showNavTooltip(element: HTMLElement, label: string) {
+    const rect = element.getBoundingClientRect();
+    setNavTooltip({ label, left: rect.right + 10, top: rect.top + rect.height / 2 });
+  }
 
   useEffect(() => {
     if (!createOpen) return;
@@ -83,6 +91,7 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
   }, [createOpen]);
 
   return (
+    <>
     <aside className={cn(
       "fixed left-0 top-0 z-30 hidden h-screen shrink-0 flex-col justify-between overflow-y-auto border-r border-[#e8e7ed] bg-white transition-[width,padding] duration-300 ease-out md:flex",
       collapsed ? "w-[76px] p-2" : "w-[252px] p-4",
@@ -100,6 +109,10 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             aria-pressed={collapsed}
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            onMouseEnter={(event) => collapsed && showNavTooltip(event.currentTarget, "Expand sidebar")}
+            onMouseLeave={() => setNavTooltip(null)}
+            onFocus={(event) => collapsed && showNavTooltip(event.currentTarget, "Expand sidebar")}
+            onBlur={() => setNavTooltip(null)}
             className={cn("flex shrink-0 items-center justify-center rounded-xl text-neutral-500 transition hover:bg-[#f2edfb] hover:text-[#5d3ab7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40", collapsed ? "h-7 w-7" : "h-9 w-9")}
           >
             {collapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
@@ -114,6 +127,10 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
             aria-expanded={createOpen}
             aria-controls="create-tools-menu"
             title={collapsed ? "Create" : undefined}
+            onMouseEnter={(event) => collapsed && showNavTooltip(event.currentTarget, "Create")}
+            onMouseLeave={() => setNavTooltip(null)}
+            onFocus={(event) => collapsed && showNavTooltip(event.currentTarget, "Create")}
+            onBlur={() => setNavTooltip(null)}
             className={cn("flex min-h-11 w-full items-center rounded-[18px] border border-transparent bg-transparent p-1.5 text-left text-sm font-semibold text-[#7130dc] shadow-none transition hover:text-[#5721b5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40", collapsed ? "justify-center" : "gap-2.5")}
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-berry text-white">
@@ -168,6 +185,10 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
                   aria-current={isActive ? "page" : undefined}
                   href={item.href}
                   title={collapsed ? item.label : undefined}
+                  onMouseEnter={(event) => collapsed && showNavTooltip(event.currentTarget, item.label)}
+                  onMouseLeave={() => setNavTooltip(null)}
+                  onFocus={(event) => collapsed && showNavTooltip(event.currentTarget, item.label)}
+                  onBlur={() => setNavTooltip(null)}
                   className={cn(
                     "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition-colors duration-200",
                     collapsed && "justify-center px-0",
@@ -187,7 +208,7 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
             {!collapsed && <p className="px-3 text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-400">Coming soon</p>}
             <nav aria-label="Coming soon tools" className="space-y-1">
               {DASHBOARD_NAV_ITEMS.filter((item) => !item.available).map(({ label, icon: Icon }) => (
-                <div key={label} aria-disabled="true" title={collapsed ? label : undefined} className={cn("flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium text-neutral-400", collapsed && "justify-center px-0")}>
+                <div key={label} aria-disabled="true" title={collapsed ? label : undefined} onMouseEnter={(event) => collapsed && showNavTooltip(event.currentTarget, label)} onMouseLeave={() => setNavTooltip(null)} className={cn("flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium text-neutral-400", collapsed && "justify-center px-0")}>
                   <Icon className="h-4 w-4 shrink-0 text-neutral-400" aria-hidden="true" />
                   <span className={collapsed ? "sr-only" : undefined}>{label}</span>
                 </div>
@@ -210,6 +231,10 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
                   aria-current={isActive ? "page" : undefined}
                   href={item.href}
                   title={collapsed ? item.label : undefined}
+                  onMouseEnter={(event) => collapsed && showNavTooltip(event.currentTarget, item.label)}
+                  onMouseLeave={() => setNavTooltip(null)}
+                  onFocus={(event) => collapsed && showNavTooltip(event.currentTarget, item.label)}
+                  onBlur={() => setNavTooltip(null)}
                   className={cn(
                     "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition hover:bg-white",
                     collapsed && "justify-center px-0",
@@ -223,8 +248,25 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
             })}
           </div>
         </div>
-
+        <Link
+          href="/billing"
+          title={collapsed ? "Upgrade plan" : undefined}
+          className={cn(
+            "flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#7130dc] px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#5f26bd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7130dc]/40 focus-visible:ring-offset-2",
+            collapsed && "mx-auto h-10 min-h-10 w-10 px-0",
+          )}
+        >
+          <Rocket className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span className={collapsed ? "sr-only" : undefined}>Upgrade plan</span>
+        </Link>
       </div>
     </aside>
+    {collapsed && navTooltip && createPortal(
+      <div role="tooltip" className="pointer-events-none fixed z-[100] -translate-y-1/2 whitespace-nowrap rounded-lg bg-[#211638] px-2.5 py-1.5 text-xs font-medium text-white shadow-lg" style={{ left: navTooltip.left, top: navTooltip.top }}>
+        {navTooltip.label}
+      </div>,
+      document.body,
+    )}
+    </>
   );
 }

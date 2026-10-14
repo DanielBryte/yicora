@@ -27,7 +27,7 @@ export function Hero() {
         <motion.div
           role="group"
           aria-label="Used by more than 300,000 creators"
-          className="mx-auto mb-5 inline-flex w-fit self-center items-center gap-2.5 text-left sm:mb-6"
+          className="mx-auto mb-6 inline-flex w-fit self-center items-center gap-2.5 text-left sm:mb-7"
           initial={{ opacity: 0, y: 18, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -58,7 +58,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[1.06] tracking-[-0.045em] text-white sm:leading-[1.08]"
+          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[1.15] tracking-[-0.035em] text-white sm:leading-[1.17]"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -67,7 +67,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mx-auto mt-6 w-full max-w-2xl text-sm font-normal leading-relaxed text-white/75 sm:mt-7 sm:text-base lg:text-lg"
+          className="mx-auto mt-8 w-full max-w-2xl text-sm font-normal leading-7 text-white/75 sm:mt-9 sm:text-base sm:leading-8 lg:text-lg"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}

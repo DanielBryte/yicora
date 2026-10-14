@@ -24,10 +24,10 @@ export function MarketingFooter() {
                 </Link>
               </li>
               <li>
-                <span className="inline-flex items-center gap-2">
-                  AI Face Changer
-                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">Coming soon</span>
-                </span>
+                <Link href="/dashboard/virtual-try-on" className="inline-flex items-center gap-2 font-medium text-white transition-colors hover:text-violet-200">
+                  Virtual Try-On
+                  <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-300">Live</span>
+                </Link>
               </li>
               <li>
                 <span className="inline-flex items-center gap-2">
@@ -74,9 +74,8 @@ export function MarketingFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} YiCORA. All rights reserved.</p>
-          <p>Made for voices, stories, and sounds from everywhere.</p>
+        <div className="mt-14 flex flex-col items-center gap-3 border-t border-white/10 pt-6 text-center text-xs text-white/45 sm:mt-16">
+          <p>© 2026 YiCORA. All rights reserved.</p>
         </div>
       </div>
     </footer>
