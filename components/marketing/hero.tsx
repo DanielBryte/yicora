@@ -58,12 +58,13 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="mx-auto w-full max-w-5xl text-[clamp(2.5rem,5vw,5rem)] font-black leading-[1.15] tracking-[-0.035em] text-white sm:leading-[1.17]"
+          className="mx-auto w-full max-w-[1600px] text-[clamp(2.5rem,4.2vw,5.5rem)] font-black leading-[1.08] tracking-[-0.04em] text-white"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
         >
-          The AI localization infrastructure for <span className="whitespace-nowrap">creative content.</span>
+          <span className="block">The AI localization infrastructure</span>
+          <span className="block">for creative content.</span>
         </motion.h1>
 
         <motion.p

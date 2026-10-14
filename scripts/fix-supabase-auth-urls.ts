@@ -17,6 +17,10 @@ const REDIRECT_URLS = [
   "https://yicora.com/auth/callback",
   "http://localhost:3000/**",
   "http://localhost:3000/auth/callback",
+  "http://localhost:3001/**",
+  "http://localhost:3001/auth/callback",
+  "http://127.0.0.1:3000/**",
+  "http://127.0.0.1:3001/**",
 ];
 
 async function updateAuthConfig() {
