@@ -12,7 +12,7 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "YiCORA — AI Localization & Creative Infrastructure for Africa",
+  title: "YiCORA - AI Localization & Creative Infrastructure for Africa",
   description:
     "YiCORA helps African creators, filmmakers, musicians, brands and media companies create, translate and transform content across languages and audiences.",
 };

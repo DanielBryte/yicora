@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from "react";
 import { Logo } from "@/components/shared/logo";
 import {
   ArrowUpRight,
@@ -68,6 +68,31 @@ export function MarketingNavbar() {
   const navRef = useRef<HTMLElement>(null);
   const productsTriggerRef = useRef<HTMLButtonElement>(null);
   const voicesTriggerRef = useRef<HTMLButtonElement>(null);
+  const closeMenuTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hoverOpenedMenuRef = useRef<"products" | "voices" | null>(null);
+
+  function cancelScheduledClose() {
+    if (closeMenuTimerRef.current) {
+      clearTimeout(closeMenuTimerRef.current);
+      closeMenuTimerRef.current = null;
+    }
+  }
+
+  function scheduleMenuClose() {
+    cancelScheduledClose();
+    closeMenuTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+      hoverOpenedMenuRef.current = null;
+      closeMenuTimerRef.current = null;
+    }, 180);
+  }
+
+  function openMenuOnHover(menu: "products" | "voices", event: ReactPointerEvent<HTMLButtonElement>) {
+    if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+    cancelScheduledClose();
+    hoverOpenedMenuRef.current = menu;
+    setOpenMenu(menu);
+  }
 
   useEffect(() => {
     if (!openMenu) return;
@@ -94,6 +119,11 @@ export function MarketingNavbar() {
   }, [openMenu]);
 
   function toggleMenu(menu: "products" | "voices") {
+    cancelScheduledClose();
+    if (hoverOpenedMenuRef.current === menu) {
+      hoverOpenedMenuRef.current = null;
+      return;
+    }
     setOpenMenu((current) => (current === menu ? null : menu));
   }
 
@@ -101,10 +131,23 @@ export function MarketingNavbar() {
     if ((event.target as HTMLElement).closest("a")) setOpenMenu(null);
   }
 
+  useEffect(() => () => {
+    if (closeMenuTimerRef.current) clearTimeout(closeMenuTimerRef.current);
+  }, []);
+
   return (
     <header className="w-full bg-transparent px-3 pb-4 pt-4 sm:px-6 sm:pb-5 sm:pt-6">
       <nav
         ref={navRef}
+        onPointerEnter={cancelScheduledClose}
+        onPointerLeave={scheduleMenuClose}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            cancelScheduledClose();
+            hoverOpenedMenuRef.current = null;
+            setOpenMenu(null);
+          }
+        }}
         className="relative mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 py-2 md:gap-6 sm:min-h-[72px]"
       >
         <Logo variant="light" />
@@ -116,6 +159,7 @@ export function MarketingNavbar() {
             type="button"
             aria-expanded={openMenu === "products"}
             aria-controls={openMenu === "products" ? "products-menu" : undefined}
+            onPointerEnter={(event) => openMenuOnHover("products", event)}
             onClick={() => toggleMenu("products")}
             className="flex items-center gap-1.5 rounded-md py-2 transition-colors hover:text-violet-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
           >
@@ -129,6 +173,7 @@ export function MarketingNavbar() {
             type="button"
             aria-expanded={openMenu === "voices"}
             aria-controls={openMenu === "voices" ? "voices-menu" : undefined}
+            onPointerEnter={(event) => openMenuOnHover("voices", event)}
             onClick={() => toggleMenu("voices")}
             className="flex items-center gap-1.5 rounded-md py-2 transition-colors hover:text-violet-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
           >
@@ -145,6 +190,7 @@ export function MarketingNavbar() {
             id="products-menu"
             role="region"
             aria-labelledby="products-trigger"
+            onPointerEnter={cancelScheduledClose}
             onClick={closeAfterNavigation}
             className="absolute left-1/2 top-full z-50 mt-3 max-h-[min(72vh,560px)] w-[min(92vw,1150px)] -translate-x-1/2 overflow-x-hidden overflow-y-auto rounded-3xl border border-white/10 bg-[#17131b]/[0.97] p-4 text-white shadow-2xl shadow-black/40 backdrop-blur-2xl sm:p-6 lg:p-8"
           >
@@ -184,6 +230,7 @@ export function MarketingNavbar() {
             id="voices-menu"
             role="region"
             aria-labelledby="voices-trigger"
+            onPointerEnter={cancelScheduledClose}
             onClick={closeAfterNavigation}
             className="absolute left-1/2 top-full z-50 mt-3 max-h-[min(72vh,560px)] w-[min(92vw,960px)] -translate-x-1/2 overflow-x-hidden overflow-y-auto rounded-3xl border border-white/10 bg-[#17131b]/[0.97] p-4 text-white shadow-2xl shadow-black/40 backdrop-blur-2xl sm:p-6 lg:p-8"
           >

@@ -25,7 +25,7 @@ export function AuthCodeListener() {
       const next = params.get("next") || "/dashboard";
       const target = `/auth/callback?code=${encodeURIComponent(code)}&next=${encodeURIComponent(next)}`;
       console.log("[AuthCodeListener] Intercepted auth code, redirecting to:", target);
-      // Hard redirect — bypasses Next.js router to ensure the code is not lost
+      // Hard redirect - bypasses Next.js router to ensure the code is not lost
       window.location.replace(target);
     }
   }, []);

@@ -73,7 +73,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
         >
-          Dub videos, turn scripts into natural speech, and create voice-overs in Yoruba, Igbo, Hausa, Swahili, and Nigerian Pidgin. Choose a tool below to try it.
+          Dub videos, turn scripts into natural speech, and create voice-overs in Yoruba, Igbo, Hausa, Swahili, Nigerian Pidgin and other local accents. Choose a tool below to try it.
         </motion.p>
 
         <motion.div
